@@ -1,0 +1,3 @@
+[submodule "FreeCMS/wwwroot/lib/AdminLTE"]
+	path = FreeCMS/wwwroot/lib/AdminLTE
+	url = https://github.com/ColorlibHQ/AdminLTE.git
