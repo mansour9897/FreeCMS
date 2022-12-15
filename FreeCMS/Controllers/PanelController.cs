@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FreeCMS.Controllers
 {
-    [Authorize]
+    // [Authorize]
     public class PanelController : Controller
     {
         public IActionResult Index()
