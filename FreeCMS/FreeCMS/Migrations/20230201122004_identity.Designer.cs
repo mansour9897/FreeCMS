@@ -12,7 +12,7 @@ namespace FreeCMS.Migrations
 {
     [DbContext(typeof(FreeCMSContext))]
     [Migration("20230201122004_identity")]
-    partial class identity
+    partial class Identity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
