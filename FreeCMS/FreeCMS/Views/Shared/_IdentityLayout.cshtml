@@ -1,0 +1,78 @@
+﻿@*@inject ISiteSettingService siteSettingService*@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - نام سایت@*@siteSettingService.GetSiteName()*@</title>
+    @*<meta name="description" content="@(((string)ViewBag.MetaDescription).Truncate(150))" />*@
+    <meta name="keywords" content="@ViewBag.MetaKeywords" />
+
+    <meta property="og:title" content="@ViewBag.OgTitle" />
+    @*<meta property="og:description" content="@(((string)ViewBag.MetaDescription).Truncate(150))" />*@
+    <meta property="og:url" content="@ViewBag.OgUrl" />
+    <meta property="og:image" content="@ViewBag.OgImage" />
+    @*<link href="@Url.Content(@siteSettingService.GetSiteLogo())" rel="shortcut icon" type="image/x-icon" />*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    @*<link rel="stylesheet" href="~/css/PagedList.css" />*@
+    @*<link rel="stylesheet" href="~/css/submenu.css" />*@
+    <link rel="stylesheet" href="~/css/Identity.css">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/webo-analytic.js"></script>
+    <script src="~/js/weboTimer.js"></script>
+</head>
+
+<body class="login-page sidebar-collapse">
+    <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top " color-on-scroll="100" id="sectionsNav">
+        <div class="container">
+            <div class="navbar-translate">
+                <a class="navbar-brand" href="/">@*@siteSettingService.GetSiteName().Truncate(20)*@ نام سایت</a>
+            </div>
+            <div class="">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
+                            <i class="fa fa-user-circle mr-1"></i>ثبت نام
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="page-header header-filter"
+         style="background-image: url('/images/bg7.jpg'); background-size: cover; background-position: top center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                    <div class="card card-login">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="copyright mx-auto">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, طراحی شده با <i class="fa fa-heart"></i> توسط
+                <a href="https://www.torangecms.ir" target="_blank">ترنج</a> برای داشتن وب بهتر
+            </div>
+        </div>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

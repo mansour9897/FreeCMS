@@ -1,0 +1,154 @@
+﻿
+@font-face {
+    font-family: 'iransansweb';
+    src: url('../lib/fonts/iransansweb(fanum).woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'iransansweb';
+    src: url('../lib/fonts/iransansweb(fanum).woff') format('woff');
+}
+
+@font-face {
+    font-family: 'iransansweb';
+    src: url('../lib/fonts/iransansweb(fanum).eot') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'iransansweb';
+    src: url('../lib/fonts/iransansweb(fanum).ttf') format('truetype');
+}
+
+body {
+
+    font-family: iransansweb,Tahoma,sans-serif;
+    direction: rtl;
+    text-align: right;
+}
+
+
+footer {
+    padding: 0.9375rem 0;
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+}
+
+    footer .copyright {
+        padding: 15px 0;
+    }
+
+    footer ul {
+        margin-bottom: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        footer ul li {
+            display: inline-block;
+        }
+
+.card {
+    border-radius: 1rem !important;
+}
+
+.header-filter {
+    position: relative;
+}
+
+    .header-filter::before {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .header-filter:before,
+    .header-filter:after {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        display: block;
+        left: 0;
+        top: 0;
+        content: "";
+    }
+
+    .header-filter .container {
+        z-index: 2;
+        position: relative;
+    }
+
+.page-header {
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+    .navbar.navbar-transparent {
+        background-color: transparent !important;
+        box-shadow: none;
+        padding-top: 25px;
+        color: #fff;
+    }
+
+    .navbar.fixed-top {
+        border-radius: 0;
+    }
+
+    .navbar .navbar-brand {
+        position: relative;
+        color: inherit;
+        height: 50px;
+        font-size: 1.125rem;
+        line-height: 30px;
+        padding: 0.625rem 0;
+    }
+
+.navbar-nav {
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    position: relative;
+    color: inherit;
+    padding: 0.9375rem;
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    line-height: 20px;
+}
+
+.login-page .footer {
+    position: fixed;
+    width: 100%;
+    background: transparent;
+    bottom: 0;
+    color: #fff;
+    z-index: 1;
+}
+
+.form-control {
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid #F1F2F3 !important;
+}
+
+@media (max-width: 375px) {
+    .page-header {
+        height: calc(100vh + 270px) !important;
+    }
+}
+
+.fixed-top {
+    z-index: 2 !important;
+}
