@@ -1,0 +1,9 @@
+﻿body {
+    direction: rtl;
+    text-align: right;
+}
+
+.form-floating > label {
+    right: 0;
+    left: unset;
+}

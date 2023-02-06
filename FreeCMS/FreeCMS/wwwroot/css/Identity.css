@@ -22,10 +22,13 @@
 body {
 
     font-family: iransansweb,Tahoma,sans-serif;
-    direction: rtl;
-    text-align: right;
+    
 }
 
+a{
+    color: #362D79;
+    text-decoration: none;
+}
 
 footer {
     padding: 0.9375rem 0;
@@ -47,6 +50,15 @@ footer {
         footer ul li {
             display: inline-block;
         }
+
+
+.btn-identity {
+    background-color: #362D79;
+    padding-right: 30px;
+    padding-left: 30px;
+    transition: 0.3s;
+    /* box-shadow: 0rem .12rem .35rem rgba(0, 0, 0, .85)!important; */
+}
 
 .card {
     border-radius: 1rem !important;
@@ -143,8 +155,13 @@ footer {
     border-bottom: 2px solid #F1F2F3 !important;
 }
 
-@media (max-width: 375px) {
-    .page-header {
+    .form-control:focus{
+        box-shadow: unset;
+    }
+
+
+    @media (max-width: 375px) {
+        .page-header {
         height: calc(100vh + 270px) !important;
     }
 }
