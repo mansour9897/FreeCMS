@@ -1,17 +1,22 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using FreeCMS.Data;
+using FreeCMS.Extensions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("FreeCMSContextConnection") ?? throw new InvalidOperationException("Connection string 'FreeCMSContextConnection' not found.");
 
 builder.Services.AddDbContext<FreeCMSContext>(options => options.UseSqlite(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<FreeCMSContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<FreeCMSContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,4 +40,8 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+var sc = app.Services.CreateScope();
+IDbInitializer dbInitializer = sc.ServiceProvider.GetRequiredService<IDbInitializer>(); 
+dbInitializer.InitializeAsync();
 app.Run();
+
