@@ -33,7 +33,8 @@ namespace FreeCMS.Extensions
                 {
                     UserName = userEmail,
                     Email = userEmail,
-                     EmailConfirmed= true,
+                    EmailConfirmed= true,
+                    LastName = roleName
                 };
                 var result = _userManager.CreateAsync(user, password).Result;
                 
