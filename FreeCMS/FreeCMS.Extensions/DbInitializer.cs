@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FreeCMS.DomainModels.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace FreeCMS.Extensions
 {
     public class DbInitializer : IDbInitializer
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public DbInitializer(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public DbInitializer(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -28,7 +29,7 @@ namespace FreeCMS.Extensions
             var user = await _userManager.FindByEmailAsync(userEmail);
             if (user == null)
             {
-                user = new IdentityUser()
+                user = new ApplicationUser()
                 {
                     UserName = userEmail,
                     Email = userEmail,
