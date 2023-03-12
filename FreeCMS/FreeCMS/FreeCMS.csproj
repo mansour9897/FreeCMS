@@ -31,4 +31,9 @@
     <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FreeCMS.DomainModels\FreeCMS.DomainModels.csproj" />
+    <ProjectReference Include="..\FreeCMS.Extensions\FreeCMS.Extensions.csproj" />
+  </ItemGroup>
+
 </Project>

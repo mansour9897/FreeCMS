@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FreeCMS.DomainModels.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FreeCMS.Data;
 
-public class FreeCMSContext : IdentityDbContext<IdentityUser>
+public class FreeCMSContext : IdentityDbContext<ApplicationUser>
 {
     public FreeCMSContext(DbContextOptions<FreeCMSContext> options)
         : base(options)
