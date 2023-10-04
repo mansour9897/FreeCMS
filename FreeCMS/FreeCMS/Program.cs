@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using FreeCMS.Data;
 using FreeCMS.Extensions;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using FreeCMS.DomainModels.Identity;
+using FreeCMS.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("FreeCMSContextConnection") ?? throw new InvalidOperationException("Connection string 'FreeCMSContextConnection' not found.");
 
-builder.Services.AddDbContext<FreeCMSContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContext<
+    FreeCMSContext>(options => options.UseSqlite(connectionString));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
