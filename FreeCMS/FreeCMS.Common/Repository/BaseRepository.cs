@@ -1,4 +1,5 @@
 ﻿using FreeCMS.DAL;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace FreeCMS.Common.Repository
@@ -32,14 +33,14 @@ namespace FreeCMS.Common.Repository
 		}
 		public T Update(T entity)
 		{
-			_context.MarkAsChanged<T>(entity);
-			_context.SaveAllChanges();
+			_context.Entry(entity).State = EntityState.Modified;
+			_context.SaveChanges();
 			return entity;
 		}
 		public T Delete(T entity)
 		{
 			_context.Set<T>().Remove(entity);
-			_context.SaveAllChanges();
+			_context.SaveChanges();
 			return entity;
 		}
 	}

@@ -5,6 +5,7 @@ using FreeCMS.DomainModels.Identity;
 using FreeCMS.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var connectionString = builder.Configuration.GetConnectionString("FreeCMSContextConnection") ?? throw new InvalidOperationException("Connection string 'FreeCMSContextConnection' not found.");
 
 builder.Services.AddDbContext<
