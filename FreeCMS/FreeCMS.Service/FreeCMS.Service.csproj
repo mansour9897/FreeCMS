@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CMS\Abstraction\" />
-    <Folder Include="CMS\Implemented\" />
+    <ProjectReference Include="..\FreeCMS.Common\FreeCMS.Common.csproj" />
+    <ProjectReference Include="..\FreeCMS.DomainModels\FreeCMS.DomainModels.csproj" />
+    <ProjectReference Include="..\FreeCMS.Repository\FreeCMS.Repository.csproj" />
   </ItemGroup>
 
 </Project>
