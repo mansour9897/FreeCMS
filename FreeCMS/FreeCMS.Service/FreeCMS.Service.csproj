@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FreeCMS.DAL\FreeCMS.DAL.csproj" />
+    <Folder Include="CMS\Abstraction\" />
+    <Folder Include="CMS\Implemented\" />
   </ItemGroup>
 
 </Project>
