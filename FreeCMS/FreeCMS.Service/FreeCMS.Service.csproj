@@ -12,4 +12,12 @@
     <ProjectReference Include="..\FreeCMS.Repository\FreeCMS.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="System\Implemented\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.2" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 
 namespace FreeCMS.Areas.Cms.Controllers
 {
-	public class PostController1 : Controller
+	public class PostController : Controller
 	{
 		public IActionResult Index()
 		{

@@ -1,4 +1,7 @@
-﻿namespace FreeCMS.Areas.Cms.ViewModels.Item
+﻿using FreeCMS.DomainModels.Cms;
+using System.ComponentModel.DataAnnotations;
+
+namespace FreeCMS.Areas.Cms.ViewModels.Item
 {
 	public class EditableItem
 	{
