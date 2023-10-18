@@ -6,9 +6,9 @@ namespace FreeCMS.Extensions
     public class DbInitializer : IDbInitializer
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public DbInitializer(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public DbInitializer(UserManager<ApplicationUser> userManager, RoleManager<Role> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -19,7 +19,7 @@ namespace FreeCMS.Extensions
             string roleName = "مدیر ارشد";
             if (!await _roleManager.RoleExistsAsync(roleName))
             {
-                var role = new IdentityRole()
+                var role = new Role()
                 { Name = roleName };
                 await _roleManager.CreateAsync(role);
             }

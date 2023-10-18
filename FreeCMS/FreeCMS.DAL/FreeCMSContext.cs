@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace FreeCMS.DAL
 {
-	public class FreeCMSContext : IdentityDbContext<ApplicationUser, Role, int>
+	public class FreeCMSContext : IdentityDbContext<ApplicationUser, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
 	{
 		public FreeCMSContext(DbContextOptions<FreeCMSContext> options)
 		: base(options)
@@ -27,8 +27,29 @@ namespace FreeCMS.DAL
 			// For example, you can rename the ASP.NET Identity table names and more.
 			// Add your customizations after calling base.OnModelCreating(builder);
 
-			builder.Entity<PostTopic>().HasKey(pt => new { pt.PostId, pt.TopicId });
+			builder.Entity<ApplicationUser>().HasMany(e => e.UserRoles)
+				.WithOne(e => e.User)
+				.HasForeignKey(ur => ur.UserId)
+				.IsRequired();
 
+			builder.Entity<Permission>().ToTable("Permissions");
+
+			builder.Entity<PostTopic>().HasKey(pt => new { pt.PostId, pt.TopicId });
+			
+			builder.Entity<Role>().HasMany(e => e.UserRoles)
+				.WithOne(e => e.Role)
+				.HasForeignKey(ur => ur.RoleId)
+				.IsRequired();
+
+			builder.Entity<RolePermission>().HasKey(rp => new { rp.RoleId, rp.PermissionId });
+
+			builder.Entity<RolePermission>().HasOne(rp => rp.Role)
+				.WithMany(r => r.RolePermissions)
+				.HasForeignKey(rp => rp.RoleId);
+
+			builder.Entity<RolePermission>().HasOne(rp => rp.Permission)
+				.WithMany(p => p.RolePermissions)
+				.HasForeignKey(rp => rp.PermissionId);
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace FreeCMS.DomainModels.Identity
 		{
 			Name = name;
 		}
-		public string Description { get; set; }
+		public string? Description { get; set; }
 		public bool IsAdmin { get; set; }
 		public virtual ICollection<RolePermission> RolePermissions { get; set; }
 		public virtual ICollection<UserRole> UserRoles { get; set; }

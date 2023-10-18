@@ -12,8 +12,11 @@ builder.Services.AddDbContext<
     FreeCMSContext>(options => options.UseSqlite(connectionString));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<IdentityRole>()
+    .AddRoles<Role>()
     .AddEntityFrameworkStores<FreeCMSContext>();
+
+//builder.Services.AddIdentity<ApplicationUser,Role>(options => options.SignIn.RequireConfirmedAccount = true)
+//    .AddRol
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
