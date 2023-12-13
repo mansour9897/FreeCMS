@@ -1,4 +1,6 @@
-﻿namespace FreeCMS.Areas.Cms.ViewModels.Topic
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FreeCMS.Areas.Cms.ViewModels.Topic
 {
 	public class EditableTopic
 	{
@@ -16,6 +18,6 @@
 
 		[Display(Name = "والد")]
 		public int? ParentId { get; set; }
-		public Topic Parent { get; set; }
+		public DomainModels.Cms.Topic Parent { get; set; }
 	}
 }
