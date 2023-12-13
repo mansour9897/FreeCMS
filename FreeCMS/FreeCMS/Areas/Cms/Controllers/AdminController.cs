@@ -2,7 +2,9 @@
 
 namespace FreeCMS.Areas.Cms.Controllers
 {
-	public class AdminController : Controller
+    [Area("CMS")]
+    [Route("CMS/[controller]/[action]")]
+    public class AdminController : Controller
 	{
 		public IActionResult Index()
 		{

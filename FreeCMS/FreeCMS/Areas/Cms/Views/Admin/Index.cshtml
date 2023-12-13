@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "وبلاگ";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Page", new { area="CMS"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-newspaper"></span>
+                <br>
+                <small>مدیریت برگه ها</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Topic", new { area="CMS"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-th-list"></span>
+                <br>
+                <small>مدیریت دسته ها</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Post", new { area="CMS"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-file-alt"></span>
+                <br>
+                <small>مدیریت نوشته ها</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Gallery", new { area="CMS"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-book"></span>
+                <br>
+                <small>مدیریت گالری ها</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Images", "Item", new { area="CMS"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-images"></span>
+                <br>
+                <small>مدیریت تصاویر</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Videos", "Item", new { area="CMS"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-film"></span>
+                <br>
+                <small>مدیریت ویدئوها</small>
+            </h1>
+        </a>
+    </div>
+</div>
