@@ -8,6 +8,8 @@ using X.PagedList;
 
 namespace FreeCMS.Areas.Cms.Controllers
 {
+	[Area("CMS")]
+	[Route("CMS/[controller]/[action]")]
 	public class GalleryController : Controller
 	{
 		#region variables

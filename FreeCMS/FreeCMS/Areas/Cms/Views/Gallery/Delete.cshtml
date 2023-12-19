@@ -1,0 +1,62 @@
+﻿@*@model FreeCMS.DomainModels.Cms.Gallery
+@{
+    ViewData["Title"] = "حذف گالری";
+    Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
+    string AreaName = "CMS";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area=AreaName})">وبلاگ</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Gallery", new { area=AreaName})"> مدیریت گالری ها</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">دسترسی ها</h3>
+            </div>
+            <div class="box-body">
+                <p>تاریخ ایجاد: @Model.CreationDate</p>
+                <p>نوع: @Model.GalleryTypeToString()</p>
+                <p>آیا از حذف این گالری مطمئن هستید؟</p>
+                @using (Html.BeginForm())
+                {
+                    <text>
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => Model.Id)
+                        @Html.ActionLink("انصراف", "Index", "Gallery", new { area = AreaName }, new { @class = "btn btn-default" }) |
+                        <input type="submit" value="حذف" class="btn btn-danger" />
+                    </text>
+                }
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">لوگو</h3>
+            </div>
+            <div class="box-body">
+                <img src="@Model.Logo" class="img-responsive">
+            </div>
+        </div>
+    </div>    <!-- ./functions -->
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-md-pull-4 col-lg-pull-4">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+            </div><!--  ./box-header -->
+            <div class="box-body">
+                <h2>@Model.Name</h2>
+                <br>
+                @Model.Description
+            </div><!-- ./box-body -->
+        </div><!-- ./box -->
+    </div><!-- ./info -->
+</div><!-- ./row -->*@

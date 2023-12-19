@@ -3,8 +3,7 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@*@inject IUserImageService userImageService
-@inject ISiteSettingService siteSettingService*@
+
 
 @{
 	string? displayName = "";
@@ -24,8 +23,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	@*<title>@ViewData["Title"] - @siteSettingService.GetSiteName()</title>*@
-	@*<link href="@Url.Content(@siteSettingService.GetSiteLogo())" rel="shortcut icon" type="image/x-icon" />*@
+	
 	<link rel="stylesheet" href="~/lib/adminlte/css/AdminLTE.css" />
 	<link rel="stylesheet" href="~/lib/adminlte/css/bootstrap.css" />
 	<link rel="stylesheet" href="~/lib/adminlte/css/bootstrap-rtl.css" />
@@ -46,9 +44,9 @@
 			<!-- Logo -->
 			<a asp-area="Core" asp-controller="Admin" asp-action="Dashboard" class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>@*@siteSettingService.GetSiteName()*@ نام سایت</b></span>
+				<span class="logo-mini"><b>نام سایت</b></span>
 				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>@*@siteSettingService.GetSiteName().Truncate(150)*@ نام سایت</b></span>
+				<span class="logo-lg"><b> نام سایت</b></span>
 			</a>
 
 			<!-- Header Navbar -->
