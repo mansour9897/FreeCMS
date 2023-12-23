@@ -8,7 +8,9 @@ using X.PagedList;
 
 namespace FreeCMS.Areas.Cms.Controllers
 {
-	public class PageController : Controller
+    [Area("CMS")]
+    [Route("CMS/[controller]/[action]")]
+    public class PageController : Controller
 	{
 		#region variables
 		private readonly string _areaName = "CMS";
