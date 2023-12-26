@@ -1,45 +1,53 @@
 @font-face {
-font-family: 'BYekan';
-src: url('../css/fonts/BYekan.eot?#') format('eot'),  /* IE6?8 */
-        url('../css/fonts/BYekan.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../css/fonts/BYekan.ttf') format('truetype');  /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
+    font-family: 'BYekan';
+    src: url('../css/fonts/BYekan.eot?#') format('eot'), /* IE6?8 */
+    url('../css/fonts/BYekan.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../css/fonts/BYekan.ttf') format('truetype'); /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
 }
+
 @font-face {
-font-family: 'BKoodak';
-src: url('../css/fonts/BKoodakBold.eot?#') format('eot'),  /* IE6?8 */
-    url('../css/fonts/BKoodakBold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-    url('../css/fonts/BKoodakBold.ttf') format('truetype');  /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
+    font-family: 'BKoodak';
+    src: url('../css/fonts/BKoodakBold.eot?#') format('eot'), /* IE6?8 */
+    url('../css/fonts/BKoodakBold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../css/fonts/BKoodakBold.ttf') format('truetype'); /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
 }
+
 @font-face {
-font-family: 'BBardiya';
-src: url('../css/fonts/BBardiya.eot?#') format('eot'),  /* IE6?8 */
-        url('../css/fonts/BBardiya.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../css/fonts/BBardiya.ttf') format('truetype');  /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
+    font-family: 'BBardiya';
+    src: url('../css/fonts/BBardiya.eot?#') format('eot'), /* IE6?8 */
+    url('../css/fonts/BBardiya.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../css/fonts/BBardiya.ttf') format('truetype'); /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
 }
+
 body {
     font-family: 'BYekan' !important;
-    font-size: 14px; 
+    font-size: 14px;
 }
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6,a {
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, a {
     font-family: 'BYekan' !important;
 }
 /* sidebar menu */
-ul.sidebar-menu img.sidebar-menu-img{
+ul.sidebar-menu img.sidebar-menu-img {
     width: 20px;
     height: 20px;
 }
-.font-size-200px{
+
+.font-size-200px {
     font-size: 200px;
 }
-.webo-user-image-page{
+
+.webo-user-image-page {
     width: 150px;
     height: 150px;
     border-radius: 50%;
 }
-.webo-mt-10{
+
+.webo-mt-10 {
     margin-top: 10px;
 }
-.webo-select-list-box .tab-pane{
+
+.webo-select-list-box .tab-pane {
     border: 1px solid #ddd;
     border-top-color: transparent;
     height: 150px;
@@ -47,6 +55,11 @@ ul.sidebar-menu img.sidebar-menu-img{
     padding-right: 10px;
     padding-top: 10px;
 }
-.webo-select-list-box .nav-tabs>li>a{
+
+.webo-select-list-box .nav-tabs > li > a {
     margin-right: 0 !important;
+}
+
+.ck-editor__editable {
+    min-height: 250px;
 }

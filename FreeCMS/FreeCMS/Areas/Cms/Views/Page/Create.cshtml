@@ -1,102 +1,111 @@
 ﻿@model FreeCMS.Areas.Cms.ViewModels.Page.NewPage
 @{
-    ViewData["Title"] = "برگه جدید";
-    Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
-    string AreaName = "CMS";
+	ViewData["Title"] = "برگه جدید";
+	Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
+	string AreaName = "CMS";
 }
 <div>
-    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
-        <li>
-            <a href="@Url.Action("Index", "Admin", new { area=AreaName})">وبلاگ</a>
-        </li>
-        <li>
-            <a href="@Url.Action("Index", "Page", new { area=AreaName})"> مدیریت برگه ها</a>
-        </li>
-        <li>
-            <span>@ViewData["Title"]</span>
-        </li>
-    </ol>
+	<ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+		<li>
+			<a href="@Url.Action("Index", "Admin", new { area=AreaName})">وبلاگ</a>
+		</li>
+		<li>
+			<a href="@Url.Action("Index", "Page", new { area=AreaName})"> مدیریت برگه ها</a>
+		</li>
+		<li>
+			<span>@ViewData["Title"]</span>
+		</li>
+	</ol>
 </div>
 <div class="row">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
-            <div class="box box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">ذخیره اطلاعات</h3>
-                </div>
-                <div class="box-body">
-                    <p>اطلاعات خود را ذخیره نمایید.</p>
-                    @Html.ActionLink("انصراف", "Index", "Page", new { area = AreaName }, new { @class = "btn btn-default"}) |
-                    <input type="submit" value="ذخیره" class="btn btn-success" />
-                </div>
-            </div>
-            <div class="box box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">وضعیت ها</h3>
-                </div>
-                <div class="box-body">
-                    <div class="form-group">
-                        @Html.EditorFor(model => model.IsPublished, new { @class = "form-control webo-vertical-resize" })
-                        @Html.LabelFor(model => model.IsPublished)
-                        @Html.ValidationMessageFor(model => model.IsPublished)
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-md-pull-4 col-lg-pull-4">
-            <div class="box box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">@ViewData["Title"]</h3>
-                </div><!-- ./box-header -->
-                <div class="box-body">
-                    @Html.ValidationSummary(true)
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Title)
-                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Title)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Body)
-                        @Html.EditorFor(model => model.Body, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Body)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Image)
-                        <div class="input-group">
-                            @Html.TextBoxFor(model => model.Image, new { @class = "form-control" })
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default image-upload" onclick="BrowseServer('Image');">
-                                    <span class="fas fa-ellipsis-h"></span>
-                                </button>
-                            </span>
-                        </div>
-                        @Html.ValidationMessageFor(model => model.Image)
-                    </div>
-                </div><!-- ./box-body -->
-            </div><!-- ./box -->
-            <div class="box box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">سئو</h3>
-                </div>
-                <div class="box-body">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.MetaKeywords)
-                        @Html.TextBoxFor(model => model.MetaKeywords, new { @class = "form-control" })
-                        <small class="form-text text-muted">کلمات کلیدی را با + از یکدیگر جدا کنید.</small>
-                        <br>
-                        @Html.ValidationMessageFor(model => model.MetaKeywords)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.MetaDescription)
-                        @Html.TextBoxFor(model => model.MetaDescription, new { @class = "form-control" })
-                        <small class="form-text text-muted">اندازه متای توضیحات حداکثر می تواند 150 کاراکتر باشد.</small>
-                        <br>
-                        @Html.ValidationMessageFor(model => model.MetaDescription)
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">ذخیره اطلاعات</h3>
+				</div>
+				<div class="box-body">
+					<p>اطلاعات خود را ذخیره نمایید.</p>
+					@Html.ActionLink("انصراف", "Index", "Page", new { area = AreaName }, new { @class = "btn btn-default"}) |
+					<input type="submit" value="ذخیره" class="btn btn-success" />
+				</div>
+			</div>
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">وضعیت ها</h3>
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						@Html.EditorFor(model => model.IsPublished, new { @class = "form-control webo-vertical-resize" })
+						@Html.LabelFor(model => model.IsPublished)
+						@Html.ValidationMessageFor(model => model.IsPublished)
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-md-pull-4 col-lg-pull-4">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">@ViewData["Title"]</h3>
+				</div><!-- ./box-header -->
+				<div class="box-body">
+					@Html.ValidationSummary(true)
+					<div class="form-group">
+						@Html.LabelFor(model => model.Title)
+						@Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.Title)
+					</div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.Body)
+						@Html.EditorFor(model => model.Body, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.Body)
+					</div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.Image)
+						<div class="input-group">
+							@Html.TextBoxFor(model => model.Image, new { @class = "form-control" })
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default image-upload" onclick="BrowseServer('Image');">
+									<span class="fas fa-ellipsis-h"></span>
+								</button>
+							</span>
+						</div>
+						@Html.ValidationMessageFor(model => model.Image)
+					</div>
+				</div><!-- ./box-body -->
+			</div><!-- ./box -->
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">سئو</h3>
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						@Html.LabelFor(model => model.MetaKeywords)
+						@Html.TextBoxFor(model => model.MetaKeywords, new { @class = "form-control" })
+						<small class="form-text text-muted">کلمات کلیدی را با + از یکدیگر جدا کنید.</small>
+						<br>
+						@Html.ValidationMessageFor(model => model.MetaKeywords)
+					</div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.MetaDescription)
+						@Html.TextBoxFor(model => model.MetaDescription, new { @class = "form-control" })
+						<small class="form-text text-muted">اندازه متای توضیحات حداکثر می تواند 150 کاراکتر باشد.</small>
+						<br>
+						@Html.ValidationMessageFor(model => model.MetaDescription)
+					</div>
+				</div>
+			</div>
+		</div>
+	}
 </div><!-- ./row -->
+@section Scripts{
+	<script src="~/ckeditor5/ckeditor5-build-classic/ckeditor.js"></script>
+	<script>
+		ClassicEditor.create(document.querySelector('#Body'),
+		{
+			language:'fa'
+		});
+	</script>
+}
