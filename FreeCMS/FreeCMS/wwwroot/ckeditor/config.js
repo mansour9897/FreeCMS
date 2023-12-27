@@ -7,7 +7,8 @@ CKEDITOR.editorConfig = function (config) {
     // Define changes to default configuration here. For example:
     //config.language = 'fa';
     config.contentsLangDirection='rtl';
-    config.filebrowserBrowseUrl = '/Folder/CkEditorSelectImage';
+    config.filebrowserBrowseUrl = '/RichFilemanager/index.html';
+    config.filebrowserImageBrowseUrl = '/RichFilemanager/index.html';
     config.toolbar = "Custome";
     config.toolbar_Custome =
 

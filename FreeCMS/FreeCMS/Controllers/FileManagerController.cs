@@ -877,8 +877,6 @@ namespace API.NetCore.Controllers
             return result;
         }
 
-
-
         private static void DirectoryCopy(string sourceDirName, string destDirName)
         {
             // Get the subdirectories for the specified directory.
