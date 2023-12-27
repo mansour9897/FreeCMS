@@ -4,6 +4,7 @@
 	Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
 	string AreaName = "CMS";
 }
+
 <div>
 	<ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
 		<li>
@@ -59,7 +60,7 @@
 					</div>
 					<div class="form-group">
 						@Html.LabelFor(model => model.Body)
-						@Html.EditorFor(model => model.Body, new { @class = "form-control" })
+						@Html.EditorFor(model => model.Body,  new { @class = "form-control" })
 						@Html.ValidationMessageFor(model => model.Body)
 					</div>
 					<div class="form-group">
@@ -101,11 +102,9 @@
 	}
 </div><!-- ./row -->
 @section Scripts{
-	<script src="~/ckeditor5/ckeditor5-build-classic/ckeditor.js"></script>
+	<script src="~/ckeditor/ckeditor.js"></script>
 	<script>
-		ClassicEditor.create(document.querySelector('#Body'),
-		{
-			language:'fa'
-		});
+		CKEDITOR.replace('Body');
 	</script>
 }
+

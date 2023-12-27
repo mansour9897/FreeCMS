@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace FreeCMS.Areas.Cms.ViewModels.Page
 {
@@ -8,9 +9,11 @@ namespace FreeCMS.Areas.Cms.ViewModels.Page
 		[Display(Name = "عنوان")]
 		public string Title { get; set; }
 
-		[UIHint("tinymce-advanced")]
+
+		[Display(Name = "متن کامل")]
 		[DataType(DataType.MultilineText)]
-		[Display(Name = "متن")]
+		[AllowHtml]
+		[UIHint("CkEditor")]
 		public string Body { get; set; }
 		[Display(Name = "انتشار")]
 		public bool IsPublished { get; set; }
