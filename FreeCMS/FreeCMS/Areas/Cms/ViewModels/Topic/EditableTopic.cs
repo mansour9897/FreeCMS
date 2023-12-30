@@ -18,6 +18,6 @@ namespace FreeCMS.Areas.Cms.ViewModels.Topic
 
 		[Display(Name = "والد")]
 		public int? ParentId { get; set; }
-		public DomainModels.Cms.Topic Parent { get; set; }
+		public DomainModels.Cms.Topic? Parent { get; set; }
 	}
 }

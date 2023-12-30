@@ -34,9 +34,13 @@ namespace FreeCMS.Service.CMS.Implemented
 			//get all topic expect the target topic
 			IList<Topic> allTopics = this.List(t => t.Id != id);
 			//for avoiding tracking problem use this syntax
-			foreach (var child in this.List(t => t.Id == id).FirstOrDefault().Children)
+			if (this.List(t => t.Id == id).FirstOrDefault().Children is not null)
 			{
-				RemoveChildren(allTopics, child);
+
+				foreach (var child in this.List(t => t.Id == id).FirstOrDefault().Children)
+				{
+					RemoveChildren(allTopics, child);
+				}
 			}
 			return allTopics.ToList();
 		}
