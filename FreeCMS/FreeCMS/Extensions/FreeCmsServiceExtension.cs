@@ -13,6 +13,8 @@ namespace FreeCMS.Extensions
 			services.AddScoped<IGalleryService, GalleryService>();
 			services.AddScoped<IPageRepository, PageRepository>();
 			services.AddScoped<IPageService, PageService>();
+			services.AddScoped<ITopicRepository, TopicRepository>();
+			services.AddScoped<ITopicService, TopicService>();
 		}
 	}
 }
