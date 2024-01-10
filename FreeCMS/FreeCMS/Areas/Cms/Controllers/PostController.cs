@@ -27,15 +27,13 @@ namespace FreeCMS.Areas.Cms.Controllers
         private readonly IPostService _postService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         #endregion
 
         #region constructors
 
         public PostController(ILogger<PostController> logger, IMapper mapper, ITopicService topicService,
             IPostService postService, IHttpContextAccessor httpContextAccessor,
-             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+             UserManager<ApplicationUser> userManager)
         {
             this._logger = logger;
             this._mapper = mapper;
@@ -43,7 +41,6 @@ namespace FreeCMS.Areas.Cms.Controllers
             this._postService = postService;
             this._httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
-            _signInManager = signInManager;
         }
         #endregion
 
@@ -144,6 +141,10 @@ namespace FreeCMS.Areas.Cms.Controllers
         public IActionResult Delete(int id)
         {
             Post post = _postService.GetPostWithPostTopics(id);
+            Task.Run(async () =>
+            {
+                post.Author = await _userManager.FindByIdAsync(post.AuthorId);
+            });
             if (post == null)
             {
                 return NotFound();
