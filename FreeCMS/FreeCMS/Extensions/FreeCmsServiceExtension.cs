@@ -19,6 +19,8 @@ namespace FreeCMS.Extensions
 			services.AddScoped<IPostRepository, PostRepository>();
 			services.AddScoped<IPostService, PostService>();
 			services.AddScoped<IPostTopicRepository,PostTopicRepository>();
+			services.AddScoped<IGalleryItemRepository,GalleryItemRepository>();
+			services.AddScoped<IGalleryItemService,GalleryItemService>();
 		}
 	}
 }

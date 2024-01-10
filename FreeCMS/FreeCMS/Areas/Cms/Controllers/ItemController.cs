@@ -8,7 +8,9 @@ using X.PagedList;
 
 namespace FreeCMS.Areas.Cms.Controllers
 {
-	public class ItemController : Controller
+    [Area("CMS")]
+    [Route("CMS/[controller]/[action]")]
+    public class ItemController : Controller
 	{
 		#region  variables
 		private readonly string _areaName = "CMS";
@@ -79,6 +81,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 		public IActionResult Details(int id)
 		{
 			GalleryItem item = _gitemService.FindById(id);
+			item.Gallery = _galleryService.FindById(item.GalleryId);
 			if (item == null)
 				return NotFound();
 			return View(item);

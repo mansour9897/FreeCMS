@@ -1,0 +1,108 @@
+@model FreeCMS.Areas.Cms.ViewModels.Item.NewItem
+@using FreeCMS.DomainModels.Cms;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    GalleryType type = (GalleryType)ViewBag.Type;
+    ViewData["Title"] = type == GalleryType.Image ? "تصویر جدید": "ویدئو جدید";
+    Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
+    string AreaName = "CMS";
+    
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area=AreaName})">وبلاگ</a>
+        </li>
+        <li>
+            @if(type == GalleryType.Image)
+            {
+                <a href="@Url.Action("Images", "Item", new { area=AreaName})"> مدیریت تصاویر</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Videos", "Item", new { area=AreaName})"> مدیریت ویدئوها</a>
+            }
+            
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    @using(Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("Type",type)
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">ذخیره اطلاعات</h3>
+                </div>
+                <div class="box-body">
+                    <p>اطلاعات خود را ذخیره نمایید.</p>
+                    @if(type == GalleryType.Image)
+                    {
+                        <text>
+                        @Html.ActionLink("انصراف", "Images", "Item", new { area = AreaName }, new { @class = "btn btn-default"}) |
+                        </text>
+                    }
+                    else
+                    {
+                        <text>
+                        @Html.ActionLink("انصراف", "Videos", "Item", new { area = AreaName }, new { @class = "btn btn-default"}) |
+                        </text>
+                    }
+                    <input type="submit" value="ذخیره" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-md-pull-4 col-lg-pull-4">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@ViewData["Title"]</h3>
+                </div><!-- ./box-header -->
+                <div class="box-body">
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title)
+                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GalleryId)
+                        <select asp-for="GalleryId" asp-items="@(SelectList)ViewBag.GalleryId" class="form-control"></select>
+                        @Html.ValidationMessageFor(model => model.GalleryId)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description)
+                        @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default image-upload" onclick="BrowseServer('Address');">
+                                    <span class="fas fa-ellipsis-h"></span>
+                                </button>
+                            </span>
+                        </div>
+                        @if(type == GalleryType.Image)
+                        {
+                            <small class="form-text text-muted">در صورت استفاده از تصاویر با منبع خارج از سایت آدرس را در کادر بالا قرار دهید.</small>
+                            <br>
+                        }
+                        else
+                        {
+                            <small class="form-text text-muted">در صورتی که ویدئو شما متعلق به آپارات است آدرس ویدئو را در کادر بالا قرار دهید.</small>
+                            <br>
+                        }
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div><!-- ./box-body -->
+            </div><!-- ./box -->
+        </div>
+    }
+</div><!-- ./row -->

@@ -1,0 +1,75 @@
+@model IPagedList<FreeCMS.DomainModels.Cms.GalleryItem>
+@using FreeCMS.Extensions;
+@using X.PagedList.Mvc.Core; 
+@using X.PagedList;
+@{
+    ViewData["Title"] = "مدیریت ویدئوها";
+    Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
+    string AreaName = "CMS";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area=AreaName})">وبلاگ</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+                <div class="box-tools pull-left">
+                    <a href="@Url.Action("Create","Item",new{area=AreaName,type=@ViewBag.Type})" class="btn btn-danger">ویدئو جدید</a>
+                </div>
+            </div>
+            <div class="box-body">
+                @if(Model != null && Model.Count > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ویدئو</th>
+                                <th>عنوان</th>
+                                <th>گالری</th>
+                                <th>تاریخ ایجاد</th>
+                                <th>فعالیت ها</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="webo-list-video">
+                                            @Html.DisplayVideo(item.Address)
+                                        </div>
+                                        
+                                    </td>
+                                    <td>@item.Title.Truncate(50,"...")</td>
+                                    <td>@item.Gallery.Name.Truncate(50,"...")</td>
+                                    <td>@item.CreationDate.ToShortDateString()</td>
+                                    <td>
+                                        @Html.ActionLink("ویرایش", "Edit", new { area=AreaName, id = item.Id }, new { @class = "btn btn-default" }) |
+                                        @Html.ActionLink("جزییات", "Details", new { area=AreaName, id = item.Id }, new { @class = "btn btn-default" }) |
+                                        @Html.ActionLink("حذف", "Delete", new { area=AreaName,id = item.Id }, new { @class = "btn btn-danger" }) 
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h4 class="text-center">ویدئویی وجود ندارد.</h4>
+                }
+            </div>
+            <div class="box-footer text-center">
+                @Html.PagedListPager(Model,page => Url.Action() + "?page=" + page)
+            </div>
+        </div>
+    </div>
+</div>
