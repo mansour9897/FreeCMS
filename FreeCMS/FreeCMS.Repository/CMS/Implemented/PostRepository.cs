@@ -8,5 +8,6 @@ namespace FreeCMS.Repository.CMS.Implemented
 	public class PostRepository : BaseRepository<Post, int>, IPostRepository
 	{
 		public PostRepository(FreeCMSContext context) : base(context) { }
-	}
+
+    }
 }

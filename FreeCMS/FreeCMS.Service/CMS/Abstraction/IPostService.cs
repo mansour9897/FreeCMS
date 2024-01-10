@@ -12,8 +12,10 @@ namespace FreeCMS.Service.CMS.Abstraction
 		List<Post> GetPublishedPosts();
 		List<Post> GetPostsByTopicId(int topicId, bool isPublished);
 		List<Post> GetMostViewedPosts(int count);
-		List<Post> GetPostsByAuthorId(int authorId, bool isPublished);
+		List<Post> GetPostsByAuthorId(string authorId, bool isPublished);
 		List<Post> Search(string query);
 		List<Post> RelatedPosts(int postId, int count);
+		Post GetPostWithPostTopics(int postId);
+
 	}
 }

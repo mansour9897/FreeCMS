@@ -2,7 +2,7 @@
 
 namespace FreeCMS.DomainModels.Identity
 {
-	public class UserClaim: IdentityUserClaim<int>
+	public class UserClaim: IdentityUserClaim<string>
 	{
 	}
 }

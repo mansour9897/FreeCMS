@@ -18,7 +18,7 @@ namespace FreeCMS.DomainModels.Cms
 		public bool IsPublished { get; set; }
 		public string Image { get; set; }
 
-		public int AuthorId { get; set; }
+		public string AuthorId { get; set; }
 		public virtual ApplicationUser Author { get; set; }
 	}
 }

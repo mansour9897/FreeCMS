@@ -68,6 +68,11 @@ namespace FreeCMS.Repository.CMS.Implemented
 				Delete(postTopic);
 			}
 		}
-		#endregion
-	}
+
+        public IList<PostTopic> GetPostTopics(int postId)
+        {
+            return _context.Set<PostTopic>().Where(p=> p.PostId==postId).ToList();
+        }
+        #endregion
+    }
 }

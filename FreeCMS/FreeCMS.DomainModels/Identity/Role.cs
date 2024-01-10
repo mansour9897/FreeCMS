@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace FreeCMS.DomainModels.Identity
 {
-	public class Role : IdentityRole<int>
+	public class Role : IdentityRole
 	{
 		public Role() { }
 		public Role(string name)

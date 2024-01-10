@@ -56,7 +56,7 @@ namespace FreeCMS.Service.CMS.Implemented
 		{
 			return this.List(p => p.IsPublished == true).OrderByDescending(p => p.CountView).Take(count).ToList();
 		}
-		public List<Post> GetPostsByAuthorId(int authorId, bool isPublished)
+		public List<Post> GetPostsByAuthorId(string authorId, bool isPublished)
 		{
 			return this.List(p => p.IsPublished == isPublished &&
 				p.AuthorId == authorId).ToList();
@@ -85,5 +85,12 @@ namespace FreeCMS.Service.CMS.Implemented
 			}
 			return result.Take(count).ToList();
 		}
-	}
+
+        public Post GetPostWithPostTopics(int postId)
+        {
+			var p = this.FindById(postId);
+			p.PostTopics = _postTopicRepo.GetPostTopics(postId);
+			return p;
+        }
+    }
 }

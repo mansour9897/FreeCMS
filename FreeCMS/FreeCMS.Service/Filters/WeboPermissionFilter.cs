@@ -43,20 +43,20 @@ namespace FreeCMS.Service.Filters
 	}
 	public static class PricipalExtensions
 	{
-		public static int GetId(this IPrincipal principal)
+		public static string GetId(this IPrincipal principal)
 		{
 			if (principal != null && principal.Identity != null)
 			{
 				var ci = principal.Identity as ClaimsIdentity;
 				string userId = ci != null ? ci.FindFirst(ClaimTypes.NameIdentifier).Value : null;
-				int result = 0;
-				if (int.TryParse(userId, out result))
-				{
-					return result;
-				}
-				return 0;
+				//int result = 0;
+				//if (int.TryParse(userId, out result))
+				//{
+				//	return result;
+				//}
+				return userId;
 			}
-			return 0;
+			return "";
 		}
 		public static async Task<bool> HasPermission(this IPrincipal principal, UserManager<ApplicationUser> userManager, string requiredPermission)
 		{
@@ -70,7 +70,7 @@ namespace FreeCMS.Service.Filters
 					//var authenticatedUser = await userManager.FindByIdAsync(userId);
 					var authenticatedUser = userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
 						.ThenInclude(r => r.RolePermissions).ThenInclude(rp => rp.Permission)
-						.Where(u => u.Id == int.Parse(userId)).FirstOrDefault();
+						.Where(u => u.Id == userId).FirstOrDefault();
 					hasPermission = authenticatedUser.IsPermissionInUserRoles(requiredPermission);
 				}
 			}
@@ -88,7 +88,7 @@ namespace FreeCMS.Service.Filters
 
 					var authenticatedUser = userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
 						.ThenInclude(r => r.RolePermissions).ThenInclude(rp => rp.Permission)
-						.Where(u => u.Id == int.Parse(userId)).FirstOrDefault();
+						.Where(u => u.Id == userId).FirstOrDefault();
 					isAdmin = authenticatedUser.IsAdmin();
 				}
 			}

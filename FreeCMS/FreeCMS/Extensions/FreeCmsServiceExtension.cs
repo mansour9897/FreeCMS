@@ -2,6 +2,7 @@
 using FreeCMS.Repository.CMS.Implemented;
 using FreeCMS.Service.CMS.Abstraction;
 using FreeCMS.Service.CMS.Implemented;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace FreeCMS.Extensions
 {
@@ -15,6 +16,9 @@ namespace FreeCMS.Extensions
 			services.AddScoped<IPageService, PageService>();
 			services.AddScoped<ITopicRepository, TopicRepository>();
 			services.AddScoped<ITopicService, TopicService>();
+			services.AddScoped<IPostRepository, PostRepository>();
+			services.AddScoped<IPostService, PostService>();
+			services.AddScoped<IPostTopicRepository,PostTopicRepository>();
 		}
 	}
 }

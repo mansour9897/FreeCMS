@@ -89,7 +89,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 
 		}
 
-		public IActionResult Author(int id, int? page)
+		public IActionResult Author(string id, int? page)
 		{
 			var author = _userManager.FindByIdAsync(id.ToString()).Result;
 			if (author == null)

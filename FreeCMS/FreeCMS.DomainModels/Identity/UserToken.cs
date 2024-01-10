@@ -2,7 +2,7 @@
 
 namespace FreeCMS.DomainModels.Identity
 {
-	public class UserToken : IdentityUserToken<int>
+	public class UserToken : IdentityUserToken<string>
 	{
 	}
 }

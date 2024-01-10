@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FreeCMS.DomainModels.Identity
 {
-	public class UserRole : IdentityUserRole<int>
+	public class UserRole : IdentityUserRole<string>
 	{
 		#region properties ...
 		public virtual ApplicationUser User { get; set; }

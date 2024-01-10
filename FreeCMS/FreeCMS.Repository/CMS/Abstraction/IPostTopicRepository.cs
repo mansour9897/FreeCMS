@@ -12,5 +12,6 @@ namespace FreeCMS.Repository.CMS.Abstraction
 		bool Exists(int postId, int topicId);
 		bool Exists(PostTopic postTopic);
 		void RemovePostFromTopics(int postId);
+		IList<PostTopic> GetPostTopics(int postId);
 	}
 }

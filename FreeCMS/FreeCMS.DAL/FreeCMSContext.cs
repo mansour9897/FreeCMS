@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace FreeCMS.DAL
 {
-	public class FreeCMSContext : IdentityDbContext<ApplicationUser, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+	public class FreeCMSContext : IdentityDbContext<ApplicationUser, Role, string, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
 	{
 		public FreeCMSContext(DbContextOptions<FreeCMSContext> options)
 		: base(options)

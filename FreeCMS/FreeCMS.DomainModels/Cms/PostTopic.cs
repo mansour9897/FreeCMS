@@ -8,3 +8,4 @@
 		public virtual Topic? Topic { get; set; }
 	}
 }
+

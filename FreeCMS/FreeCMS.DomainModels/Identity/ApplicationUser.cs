@@ -2,7 +2,7 @@
 
 namespace FreeCMS.DomainModels.Identity
 {
-	public class ApplicationUser : IdentityUser<int>
+	public class ApplicationUser : IdentityUser
 	{
 		public string? FirstName { get; set; }
 		public string? LastName { get; set; }
