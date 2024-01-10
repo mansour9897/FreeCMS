@@ -1,0 +1,18 @@
+﻿@model IList<FreeCMS.Areas.Cms.ViewModels.Topic.TopicCheckbox>
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul class="webo-topics-list">
+        @foreach (var topic in Model)
+        {
+            <li>
+                <input type="checkbox" name="SelectedTopics" value="@topic.Id" checked="@topic.IsSelected" disabled />
+                @Html.Label(topic.Name)
+                @if (topic.Children != null && topic.Children.Count > 0)
+                {
+                    @await Html.PartialAsync("_TopicsSelectDisplay",topic.Children)
+                }
+            </li>
+        }
+    </ul>
+}

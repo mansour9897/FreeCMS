@@ -95,7 +95,6 @@ namespace FreeCMS.Areas.Cms.Controllers
             {
                 post.Author = await _userManager.FindByIdAsync(post.AuthorId);
             });
-            
 
             if (post == null)
             {
