@@ -18,12 +18,12 @@
 		}
 	}
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
 	<link rel="stylesheet" href="~/lib/adminlte/css/AdminLTE.css" />
 	<link rel="stylesheet" href="~/lib/adminlte/css/bootstrap.css" />
 	<link rel="stylesheet" href="~/lib/adminlte/css/bootstrap-rtl.css" />
@@ -66,25 +66,17 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a asp-area="" asp-controller="Profile" asp-action="Index" target="_blank" title="نمایش پروفایل">
-								<span class="fas fa-user"></span>
-							</a>
-						</li>
-
-						<li class="dropdown user user-menu">
-							<!-- Menu Toggle Button -->
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								@*<img src="@userImageService.GetCurrentUserImage()" class="user-image">*@
-								<!-- hidden-xs hides the username on small devices so only the image appears. -->
-								<span class="hidden-xs">@displayName</span>
+								<span class="fas fa-user"></span>
+								<span class="hidden-xs mx-4">@displayName</span>
 							</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="#">ویرایش پروفایل</a></li>
 								<li><a class="dropdown-item" href="#">تغییر رمز عبور</a></li>
 								<li><a class="dropdown-item" href="#">ویرایش ایمیل</a></li>
-
+								<hr class="my-2">
 								<!-- Menu Footer-->
-								<li class="user-footer">
+								<li class="user-footer mx-3">
 									<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
 										<button type="submit" class="btn btn-default">خروج</button>
 									</form>
@@ -100,17 +92,30 @@
 
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
-				<!-- Sidebar user panel -->
-				<div class="user-panel">
-					<div class="pull-left image">
-						@*<img src="@userImageService.GetCurrentUserImage()" class="img-circle" alt="User Image" />*@
-					</div>
-					<div class="pull-left info">
-						<p>@displayName</p>
-					</div>
-				</div>
 				<!-- Sidebar Menu -->
-				@*@await Component.InvokeAsync("ShowPanelMenu")*@
+				<ul class="sidebar-menu">
+					<li class="nav-item">
+						<a href="/cms/admin/index" class="nav-link">
+							<i class="fas fa-tachometer-alt"></i>
+							&nbsp;
+							<span>داشبورد</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="/cms/admin/index" class="nav-link">
+							<i class="fas fa-pencil-alt"></i>
+							&nbsp;
+							<span>وبلاگ</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="/RichFilemanager/index.html" target="_blank" class="nav-link">
+							<i class="fas fa-folder"></i>
+							&nbsp;
+							<span>مدیریت فایل ها</span>
+						</a>
+					</li>
+				</ul><!-- /.sidebar-menu -->
 			</section>
 			<!-- /.sidebar -->
 		</aside>

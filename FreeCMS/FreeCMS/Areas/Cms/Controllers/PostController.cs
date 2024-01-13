@@ -60,6 +60,7 @@ namespace FreeCMS.Areas.Cms.Controllers
             SetupTopicsSelector(null);
             return View();
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(NewPost model)
