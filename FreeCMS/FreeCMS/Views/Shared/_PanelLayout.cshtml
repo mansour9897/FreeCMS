@@ -3,8 +3,7 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@*@inject IUserImageService userImageService
-@inject ISiteSettingService siteSettingService*@
+
 
 @{
 	string? displayName = "";
@@ -19,13 +18,12 @@
 		}
 	}
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	@*<title>@ViewData["Title"] - @siteSettingService.GetSiteName()</title>*@
-	@*<link href="@Url.Content(@siteSettingService.GetSiteLogo())" rel="shortcut icon" type="image/x-icon" />*@
 	<link rel="stylesheet" href="~/lib/adminlte/css/AdminLTE.css" />
 	<link rel="stylesheet" href="~/lib/adminlte/css/bootstrap.css" />
 	<link rel="stylesheet" href="~/lib/adminlte/css/bootstrap-rtl.css" />
@@ -36,6 +34,7 @@
 	<link rel="stylesheet" href="~/lib/adminlte/css/adminltefix.css" />
 	<link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
 	<link rel="stylesheet" href="~/css/admin.css" />
+	@RenderSection("Head", false)
 </head>
 <body class="skin-purple-light sidebar-mini">
 	<div class="wrapper">
@@ -46,9 +45,9 @@
 			<!-- Logo -->
 			<a asp-area="Core" asp-controller="Admin" asp-action="Dashboard" class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>@*@siteSettingService.GetSiteName()*@ نام سایت</b></span>
+				<span class="logo-mini"><b>نام سایت</b></span>
 				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>@*@siteSettingService.GetSiteName().Truncate(150)*@ نام سایت</b></span>
+				<span class="logo-lg"><b> نام سایت</b></span>
 			</a>
 
 			<!-- Header Navbar -->
@@ -67,25 +66,17 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a asp-area="" asp-controller="Profile" asp-action="Index" target="_blank" title="نمایش پروفایل">
-								<span class="fas fa-user"></span>
-							</a>
-						</li>
-
-						<li class="dropdown user user-menu">
-							<!-- Menu Toggle Button -->
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								@*<img src="@userImageService.GetCurrentUserImage()" class="user-image">*@
-								<!-- hidden-xs hides the username on small devices so only the image appears. -->
-								<span class="hidden-xs">@displayName</span>
+								<span class="fas fa-user"></span>
+								<span class="hidden-xs mx-4">@displayName</span>
 							</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="#">ویرایش پروفایل</a></li>
 								<li><a class="dropdown-item" href="#">تغییر رمز عبور</a></li>
 								<li><a class="dropdown-item" href="#">ویرایش ایمیل</a></li>
-
+								<hr class="my-2">
 								<!-- Menu Footer-->
-								<li class="user-footer">
+								<li class="user-footer mx-3">
 									<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
 										<button type="submit" class="btn btn-default">خروج</button>
 									</form>
@@ -101,17 +92,30 @@
 
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
-				<!-- Sidebar user panel -->
-				<div class="user-panel">
-					<div class="pull-left image">
-						@*<img src="@userImageService.GetCurrentUserImage()" class="img-circle" alt="User Image" />*@
-					</div>
-					<div class="pull-left info">
-						<p>@displayName</p>
-					</div>
-				</div>
 				<!-- Sidebar Menu -->
-				@*@await Component.InvokeAsync("ShowPanelMenu")*@
+				<ul class="sidebar-menu">
+					<li class="nav-item">
+						<a href="/cms/admin/index" class="nav-link">
+							<i class="fas fa-tachometer-alt"></i>
+							&nbsp;
+							<span>داشبورد</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="/cms/admin/index" class="nav-link">
+							<i class="fas fa-pencil-alt"></i>
+							&nbsp;
+							<span>وبلاگ</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="/RichFilemanager/index.html" target="_blank" class="nav-link">
+							<i class="fas fa-folder"></i>
+							&nbsp;
+							<span>مدیریت فایل ها</span>
+						</a>
+					</li>
+				</ul><!-- /.sidebar-menu -->
 			</section>
 			<!-- /.sidebar -->
 		</aside>

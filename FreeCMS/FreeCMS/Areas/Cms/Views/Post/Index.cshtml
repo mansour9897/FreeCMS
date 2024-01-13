@@ -1,0 +1,70 @@
+﻿@model IPagedList<FreeCMS.DomainModels.Cms.Post>
+@using FreeCMS.Extensions;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "مدیریت نوشته ها";
+    Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
+    string AreaName = "CMS";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area=AreaName})">وبلاگ</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+                <div class="box-tools pull-left">
+                    <a href="@Url.Action("Create","Post",new{area=AreaName})" class="btn btn-danger">نوشته جدید</a>
+                </div>
+            </div>
+            <div class="box-body">
+                @if (Model != null && Model.Count > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>تصویر</th>
+                                <th>عنوان</th>
+                                <th>بازدید</th>
+                                <th>تاریخ ایجاد</th>
+                                <th>فعالیت ها</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var post in Model)
+                            {
+                                <tr>
+                                    <td><img src="@post.Image" alt="@post.Title" class="img-responsive webo-list-img"></td>
+                                    <td>@post.Title.Truncate(50,"...")</td>
+                                    <td>@post.CountView</td>
+                                    <td>@post.CreationDate</td>
+                                    <td>
+                                        @Html.ActionLink("ویرایش", "Edit", new { area=AreaName, id = post.Id }, new { @class = "btn btn-default" }) |
+                                        @Html.ActionLink("جزییات", "Details", new { area=AreaName, id = post.Id }, new { @class = "btn btn-default" }) |
+                                        @Html.ActionLink("حذف", "Delete", new { area=AreaName,id = post.Id }, new { @class = "btn btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h4 class="text-center">نوشته ای وجود ندارد.</h4>
+                }
+            </div>
+            <div class="box-footer text-center">
+                @Html.PagedListPager(Model,page => Url.Action() + "?page=" + page)
+            </div>
+        </div>
+    </div>
+</div>

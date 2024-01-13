@@ -1,45 +1,53 @@
 @font-face {
-font-family: 'BYekan';
-src: url('../css/fonts/BYekan.eot?#') format('eot'),  /* IE6?8 */
-        url('../css/fonts/BYekan.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../css/fonts/BYekan.ttf') format('truetype');  /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
+    font-family: 'BYekan';
+    src: url('../css/fonts/BYekan.eot?#') format('eot'), /* IE6?8 */
+    url('../css/fonts/BYekan.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../css/fonts/BYekan.ttf') format('truetype'); /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
 }
+
 @font-face {
-font-family: 'BKoodak';
-src: url('../css/fonts/BKoodakBold.eot?#') format('eot'),  /* IE6?8 */
-    url('../css/fonts/BKoodakBold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-    url('../css/fonts/BKoodakBold.ttf') format('truetype');  /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
+    font-family: 'BKoodak';
+    src: url('../css/fonts/BKoodakBold.eot?#') format('eot'), /* IE6?8 */
+    url('../css/fonts/BKoodakBold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../css/fonts/BKoodakBold.ttf') format('truetype'); /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
 }
+
 @font-face {
-font-family: 'BBardiya';
-src: url('../css/fonts/BBardiya.eot?#') format('eot'),  /* IE6?8 */
-        url('../css/fonts/BBardiya.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../css/fonts/BBardiya.ttf') format('truetype');  /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
+    font-family: 'BBardiya';
+    src: url('../css/fonts/BBardiya.eot?#') format('eot'), /* IE6?8 */
+    url('../css/fonts/BBardiya.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../css/fonts/BBardiya.ttf') format('truetype'); /* Saf3?5, Chrome4+, FF3.5, Opera 10+ */
 }
+
 body {
     font-family: 'BYekan' !important;
-    font-size: 14px; 
+    font-size: 14px;
 }
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6,a {
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, a {
     font-family: 'BYekan' !important;
 }
 /* sidebar menu */
-ul.sidebar-menu img.sidebar-menu-img{
+ul.sidebar-menu img.sidebar-menu-img {
     width: 20px;
     height: 20px;
 }
-.font-size-200px{
+
+.font-size-200px {
     font-size: 200px;
 }
-.webo-user-image-page{
+
+.webo-user-image-page {
     width: 150px;
     height: 150px;
     border-radius: 50%;
 }
-.webo-mt-10{
+
+.webo-mt-10 {
     margin-top: 10px;
 }
-.webo-select-list-box .tab-pane{
+
+.webo-select-list-box .tab-pane {
     border: 1px solid #ddd;
     border-top-color: transparent;
     height: 150px;
@@ -47,6 +55,223 @@ ul.sidebar-menu img.sidebar-menu-img{
     padding-right: 10px;
     padding-top: 10px;
 }
-.webo-select-list-box .nav-tabs>li>a{
+
+.webo-select-list-box .nav-tabs > li > a {
     margin-right: 0 !important;
 }
+
+.ck-editor__editable {
+    min-height: 250px;
+}
+
+
+.m-0 {
+    margin: 0 !important;
+}
+
+.m-1 {
+    margin: 0.25rem !important;
+}
+
+.m-2 {
+    margin: 0.5rem !important;
+}
+
+.m-3 {
+    margin: 1rem !important;
+}
+
+.m-4 {
+    margin: 1.5rem !important;
+}
+
+.m-5 {
+    margin: 3rem !important;
+}
+
+.m-auto {
+    margin: auto !important;
+}
+
+.mx-0 {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.mx-1 {
+    margin-right: 0.25rem !important;
+    margin-left: 0.25rem !important;
+}
+
+.mx-2 {
+    margin-right: 0.5rem !important;
+    margin-left: 0.5rem !important;
+}
+
+.mx-3 {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+}
+
+.mx-4 {
+    margin-right: 1.5rem !important;
+    margin-left: 1.5rem !important;
+}
+
+.mx-5 {
+    margin-right: 3rem !important;
+    margin-left: 3rem !important;
+}
+
+.mx-auto {
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+.my-0 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.my-1 {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.my-2 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.my-3 {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.my-4 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.my-5 {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+}
+
+.my-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+.mt-1 {
+    margin-top: 0.25rem !important;
+}
+
+.mt-2 {
+    margin-top: 0.5rem !important;
+}
+
+.mt-3 {
+    margin-top: 1rem !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.mt-auto {
+    margin-top: auto !important;
+}
+
+.me-0 {
+    margin-right: 0 !important;
+}
+
+.me-1 {
+    margin-right: 0.25rem !important;
+}
+
+.me-2 {
+    margin-right: 0.5rem !important;
+}
+
+.me-3 {
+    margin-right: 1rem !important;
+}
+
+.me-4 {
+    margin-right: 1.5rem !important;
+}
+
+.me-5 {
+    margin-right: 3rem !important;
+}
+
+.me-auto {
+    margin-right: auto !important;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.mb-1 {
+    margin-bottom: 0.25rem !important;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.mb-5 {
+    margin-bottom: 3rem !important;
+}
+
+.mb-auto {
+    margin-bottom: auto !important;
+}
+
+.ms-0 {
+    margin-left: 0 !important;
+}
+
+.ms-1 {
+    margin-left: 0.25rem !important;
+}
+
+.ms-2 {
+    margin-left: 0.5rem !important;
+}
+
+.ms-3 {
+    margin-left: 1rem !important;
+}
+
+.ms-4 {
+    margin-left: 1.5rem !important;
+}
+
+.ms-5 {
+    margin-left: 3rem !important;
+}
+
+.ms-auto {
+    margin-left: auto !important;
+}
+

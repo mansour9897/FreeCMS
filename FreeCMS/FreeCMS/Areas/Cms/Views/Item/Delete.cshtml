@@ -1,0 +1,102 @@
+@model FreeCMS.DomainModels.Cms.GalleryItem
+@using FreeCMS.DomainModels.Cms
+@{
+	GalleryType type = Model.Gallery.Type;
+	ViewData["Title"] = type == GalleryType.Image ? "حذف تصویر" : "حذف ویدئو";
+	Layout = "~/Areas/CMS/Views/Shared/_AdminLayout.cshtml";
+	string AreaName = "CMS";
+}
+<div>
+	<ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+		<li>
+			<a href="@Url.Action("Index", "Admin", new { area=AreaName})">وبلاگ</a>
+		</li>
+		<li>
+			@if (type == GalleryType.Image)
+			{
+				<a href="@Url.Action("Images", "Item", new { area=AreaName})"> مدیریت تصاویر</a>
+			}
+			else
+			{
+				<a href="@Url.Action("Videos", "Item", new { area=AreaName})"> مدیریت ویدئوها</a>
+			}
+		</li>
+		<li>
+			<span>@ViewData["Title"]</span>
+		</li>
+	</ol>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+		<div class="box box-solid">
+			<div class="box-header with-border">
+				<h3 class="box-title">دسترسی ها</h3>
+			</div>
+			<div class="box-body">
+				<p>تاریخ ایجاد: @Model.CreationDate</p>
+				<p>گالری: @Model.Gallery.Name</p>
+				@if (type == GalleryType.Image)
+				{
+					<p>آیا از حذف این تصویر مطمئن هستید؟</p>
+					@using (Html.BeginForm())
+					{
+						<text>
+							@Html.AntiForgeryToken()
+							@Html.HiddenFor(model => Model.Id)
+							@Html.ActionLink("انصراف", "Images", "Item", new { area = AreaName }, new { @class = "btn btn-default" }) |
+							<input type="submit" value="حذف" class="btn btn-danger" />
+						</text>
+					}
+				}
+				else
+				{
+					<p>آیا از حذف این ویدئو مطمئن هستید؟</p>
+					@using (Html.BeginForm())
+					{
+						<text>
+							@Html.AntiForgeryToken()
+							@Html.HiddenFor(model => Model.Id)
+							@Html.ActionLink("انصراف", "Videos", "Item", new { area = AreaName }, new { @class = "btn btn-default" }) |
+							<input type="submit" value="حذف" class="btn btn-danger" />
+						</text>
+					}
+				}
+			</div>
+		</div>
+		<div class="box box-solid">
+			<div class="box-header with-border">
+				@if (type == GalleryType.Image)
+				{
+					<h3 class="box-title">تصویر</h3>
+				}
+				else
+				{
+					<h3 class="box-title">ویدئو</h3>
+				}
+			</div>
+			<div class="box-body">
+				@if (type == GalleryType.Image)
+				{
+					<img src="@Model.Address" class="img-responsive">
+				}
+				else
+				{
+					if (Model.Address is not null)
+						@Html.DisplayVideo(Model.Address)
+				}
+			</div>
+		</div>
+	</div>    <!-- ./functions -->
+	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-md-pull-4 col-lg-pull-4">
+		<div class="box box-solid">
+			<div class="box-header with-border">
+				<h3 class="box-title">@ViewData["Title"]</h3>
+			</div><!--  ./box-header -->
+			<div class="box-body">
+				<h2>@Model.Title</h2>
+				<br>
+				@Model.Description
+			</div><!-- ./box-body -->
+		</div><!-- ./box -->
+	</div><!-- ./info -->
+</div><!-- ./row -->

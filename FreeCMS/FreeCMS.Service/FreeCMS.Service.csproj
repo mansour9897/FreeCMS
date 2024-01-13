@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FreeCMS.Common\FreeCMS.Common.csproj" />
+    <ProjectReference Include="..\FreeCMS.DomainModels\FreeCMS.DomainModels.csproj" />
+    <ProjectReference Include="..\FreeCMS.Repository\FreeCMS.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="System\Implemented\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.2" />
+  </ItemGroup>
+
+</Project>
