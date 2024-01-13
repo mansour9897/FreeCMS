@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "پیشخوان پلاگین مدیریت";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "User", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-users"></span>
+                <br>
+                <small>مدیریت کاربران</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Role", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-lock"></span>
+                <br>
+                <small>مدیریت نقش ها</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Plugin", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-plug"></span>
+                <br>
+                <small>مدیریت پلاگین ها</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Site", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-cogs"></span>
+                <br>
+                <small>تنظیمات سایت</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Contact", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-mail-bulk"></span>
+                <br>
+                <small>مدیریت پیام ها</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Comment", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-comments"></span>
+                <br>
+                <small>مدیریت دیدگاه ها</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "SocialNetwork", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-link"></span>
+                <br>
+                <small>مدیریت شبکه های اجتماعی</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Analytic", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-chart-line"></span>
+                <br>
+                <small>آمار بازدید</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Index", "Menu", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-list-ul"></span>
+                <br>
+                <small>مدیریت منوها</small>
+            </h1>
+        </a>
+    </div>
+</div>

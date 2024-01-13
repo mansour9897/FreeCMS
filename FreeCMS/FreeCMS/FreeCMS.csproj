@@ -39,6 +39,8 @@
   <ItemGroup>
     <Folder Include="Areas\Cms\Data\" />
     <Folder Include="Areas\Cms\Models\" />
+    <Folder Include="Areas\Core\Data\" />
+    <Folder Include="Areas\Core\Models\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="Pages\" />
