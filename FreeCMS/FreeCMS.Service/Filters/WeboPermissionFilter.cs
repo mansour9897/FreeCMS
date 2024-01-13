@@ -9,10 +9,10 @@ using System.Security.Principal;
 
 namespace FreeCMS.Service.Filters
 {
-	public class WeboPermissionFilter : Attribute, IAsyncAuthorizationFilter
+	public class FreeCmsPermissionFilter : Attribute, IAsyncAuthorizationFilter
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
-		public WeboPermissionFilter(UserManager<ApplicationUser> userManager)
+		public FreeCmsPermissionFilter(UserManager<ApplicationUser> userManager)
 		{
 			_userManager = userManager;
 		}
