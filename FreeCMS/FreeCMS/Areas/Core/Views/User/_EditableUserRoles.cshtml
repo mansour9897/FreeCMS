@@ -1,0 +1,88 @@
+@model FreeCMS.Areas.Core.ViewModels.EditUserVm
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Unbind the original image 'href' set by the controller...
+        $('.deleteRole').attr('href', 'javascript://');
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            var roleName = button.attr("roleName");
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('#btn-role-delete').attr('data-roleid', recipient);
+            modal.find('#role-info').html(roleName);
+        });
+        $("#exampleModal").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+        $("#btn-role-delete").click(function () {
+            
+            var _userId = @Model.Id.ToString();
+            var _id = $(this).data('roleid');
+
+            var _parameters = { userId: _userId, id: _id };
+            $.ajax({
+                url: "/Core/User/DeleteUserRoleReturnPartialView",
+                type: "GET",
+                data: _parameters,
+                success: function (data, textStatus, jqXHR) {
+                    $('#RolesTable').html(data);
+                    $('#exampleModal').modal('hide');
+                    $(".modal-backdrop").remove();
+                }
+            });
+            $('#exampleModal').modal('hide');
+            $(".modal-backdrop").remove();
+        });
+    })
+</script>
+<div class="table-responsive" id="RolesTable">
+    @if(Model.UserRoles != null && Model.UserRoles.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>نقش</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model.UserRoles)
+                {
+                    <tr>
+                        <td>@role.Role.Name</td>
+                        <td>
+                            <a href="#" class="deleteRole btn btn-default " id=@Model.Id roleName="@role.Role.Name" data-toggle="modal" data-target="#exampleModal" data-whatever="@role.RoleId">
+                                حذف
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h4><font color="#ccc">برای این کاربر هیچ نقشی وجود ندارد...</font></h4>
+        <br />
+    }
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">حذف نقش</h4>
+            </div>
+            <div class="modal-body">
+                آیا از حذف این نقش مطمئن هستید؟
+                <div id="role-info"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-danger" id="btn-role-delete" data-roleid="">حذف</button>
+            </div>
+        </div>
+    </div>
+</div>

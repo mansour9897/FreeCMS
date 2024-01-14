@@ -1,0 +1,80 @@
+@{
+    ViewData["Title"] = "ویرایش تصویر کاربر";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "User", new { area="Core"})">مدیریت کاربران</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    @using (Html.BeginForm("ChangeImage", "User", FormMethod.Post, new { area = "Core", enctype = "multipart/form-data",id=ViewBag.UserId }))
+    {
+         <input type="hidden" id="id" name="id" value="@ViewBag.UserId">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+            <div class="box box-solid">
+                <div class="box-header">
+                    <h3 class="box-title">ذخیره اطلاعات</h3>
+                </div>
+                <div class="box-body">
+                    <p>آنچه برای ارسال تصویر جدید باید بدانید.</p>
+                    <ul style="list-style:disc">
+                        <li>حداکثر حجم فایل @ViewBag.ProfileImageSize کیلو باشد.</li>
+                        <li>با فشار دکمه Browse فایل را روی کامپیوترتان انتخاب کرده و دکمه ذخیره را بزنید.</li>
+                        <li>برای حذف تصویر نیز دکمه تصویر پیش فرض را بزنید.</li>
+                    </ul>
+                    <div class="pull-left">
+                        <a href="@Url.Action("Edit","User", new { area="Core",id=ViewBag.UserId})" class="btn btn-default">انصراف</a> |
+                        <input type="submit" value="ذخیره" class="btn btn-success" />
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="box box-solid">
+                <div class="box-header">
+                    <h3 class="box-title">تصویر پیش فرض</h3>
+                </div>
+                <div class="box-body">
+                    <p>تصویر کاربر با تصویر پیش فرض جایگزین می شود. </p>
+                    <div class="pull-left">
+                        <a href="@Url.Action("RemoveImage", "User", new { area="Core",id=ViewBag.UserId})" class="btn btn-default">تصویر پیش فرض</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-md-pull-4 col-lg-pull-4">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@ViewData["Title"]</h3>
+                </div><!-- ./box-header -->
+                <div class="box-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        @*<div style="background-image: url('@userImageService.GetUserImage(ViewBag.UserId)'); background-size: 150px 150px; height: 150px; width: 150px; border-radius: 50%;"> </div>*@
+                                    </div>
+                                    <div class="panel-footer">
+                                        <input type="file" name="file" id="file" class="image-upload" style="width:100%;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- ./box-body -->
+            </div><!-- ./box -->
+        </div>
+    }
+</div><!-- ./row -->
