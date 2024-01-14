@@ -2,7 +2,7 @@ using System;
 namespace FreeCMS.Attributes
 {
     [AttributeUsage(AttributeTargets.Class,Inherited=false,AllowMultiple=false)]
-    public class WeboSelectListAttribute:Attribute
+    public class FreeCmsSelectListAttribute:Attribute
     {
         #region variables
         private string _title;
@@ -10,7 +10,7 @@ namespace FreeCMS.Attributes
         #endregion
 
         #region constructors 
-        public WeboSelectListAttribute(string title,uint priority = 0)
+        public FreeCmsSelectListAttribute(string title,uint priority = 0)
         {
             if(string.IsNullOrEmpty(title)) 
                 throw new ArgumentNullException(string.Format("{0} is null or empty.",nameof(title)));

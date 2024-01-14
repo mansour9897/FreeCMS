@@ -1,6 +1,6 @@
 using FreeCMS.DomainModels.Identity;
 using System.ComponentModel.DataAnnotations;
-namespace Webo.Core.Areas.Core.ViewModels
+namespace FreeCMS.Areas.Core.ViewModels
 {
     public class UserDetails
     {

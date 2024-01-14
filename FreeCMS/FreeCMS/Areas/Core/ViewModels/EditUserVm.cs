@@ -1,7 +1,7 @@
 using FreeCMS.DomainModels.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-namespace Webo.Core.Areas.Core.ViewModels
+namespace FreeCMS.Areas.Core.ViewModels
 {
     public class EditUserVm
     {
