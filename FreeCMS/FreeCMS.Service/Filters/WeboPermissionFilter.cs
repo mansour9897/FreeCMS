@@ -47,8 +47,15 @@ namespace FreeCMS.Service.Filters
 		{
 			if (principal != null && principal.Identity != null)
 			{
+				string userId = "";
 				var ci = principal.Identity as ClaimsIdentity;
-				string userId = ci != null ? ci.FindFirst(ClaimTypes.NameIdentifier).Value : null;
+				try
+				{
+					userId = ci != null ? ci.FindFirst(ClaimTypes.NameIdentifier).Value : null;
+
+				}
+				catch { }
+				finally { }
 				//int result = 0;
 				//if (int.TryParse(userId, out result))
 				//{

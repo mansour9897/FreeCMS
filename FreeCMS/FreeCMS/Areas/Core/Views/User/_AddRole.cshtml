@@ -1,30 +1,34 @@
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(":input[type='button']").button();
-        $('#AddRole').click(function () {
-            var _userId = $('#UserId').val();
-            var _id = $('#RoleId').val();
 
-            if (_userId == '') {
-                return false;
-            }
-
-            var _parameters = { userId: _userId, id: _id };
-            $.ajax({
-                url: "/Core/User/AddUserRoleReturnPartialView",
-                type: "GET",
-                data: _parameters,
-                success: function (data, textStatus, jqXHR) {
-                    $('#RolesTable').html(data);
-                }
-            });
-        });
-    });
-</script>
 <input name='UserId' id='UserId' type="hidden" value="@ViewBag.UserId" />
 <div class="form-group">
-    <label> نقش: </label>
-    @Html.DropDownList("RoleId", null, string.Empty, new { @class="form-control" })
+	<label> نقش: </label>
+	@Html.DropDownList("RoleId", null, string.Empty, new { @class="form-control" })
 </div>
 
 <input class="btn btn-default pull-left" type="button" id="AddRole" value="افزودن" />
+
+@*@section Scripts{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(":input[type='button']").button();
+			$('#AddRole').click(function () {
+				var _userId = $('#UserId').val();
+				var _id = $('#RoleId').val();
+
+				if (_userId == '') {
+					return false;
+				}
+
+				var _parameters = { userId: _userId, id: _id };
+				$.ajax({
+					url: "/Core/User/AddUserRoleReturnPartialView",
+					type: "GET",
+					data: _parameters,
+					success: function (data, textStatus, jqXHR) {
+						$('#RolesTable').html(data);
+					}
+				});
+			});
+		});
+	</script>
+}*@

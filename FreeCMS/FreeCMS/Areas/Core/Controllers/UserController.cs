@@ -9,13 +9,16 @@ using FreeCMS.DomainModels.Identity;
 using Microsoft.AspNetCore.Identity;
 using FreeCMS.Attributes;
 using FreeCMS.Service.Filters;
+using Microsoft.AspNetCore.Authorization;
+
 using FreeCMS.Areas.Core.ViewModels;
+
 
 namespace Webo.Core.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    //[WeboAuthorize]
+    [Authorize]
     [ControllerInfo("مدیریت کاربران")]
     public class UserController:Controller
     {
@@ -57,6 +60,7 @@ namespace Webo.Core.Areas.Core.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(AddUserVm model)
@@ -91,8 +95,9 @@ namespace Webo.Core.Areas.Core.Controllers
             }
             return View(model);
         }
+
         [ActionInfo("اطلاعات کاربر","مشاهده اطلاعات کاربر")]
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
             var user = _userManager.FindByIdAsync(id.ToString()).Result;
             if(user == null)
@@ -101,19 +106,23 @@ namespace Webo.Core.Areas.Core.Controllers
             }
             return View(new UserDetails(user));
         }
+
         [ActionInfo("ویرایش کاربر","ویرایش اطلاعات کاربر")]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             ViewBag.RoleId = new SelectList(this.GetRoles(), "Id", "Name");
             ViewBag.UserId = id;
             string newPassword = "Websos!!0#";
             ViewBag.NewPassword = newPassword;
-            var user = _userManager.FindByIdAsync(id.ToString()).Result;
+            var user = _userManager.FindByIdAsync(id).Result;
             if(user == null)
             {
                 return  NotFound();
             }
-            return View(new EditUserVm(user));
+            var model = new EditUserVm(user);
+            model.UserRoles = _userManager.GetRolesAsync(user).Result;
+
+			return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -142,9 +151,9 @@ namespace Webo.Core.Areas.Core.Controllers
             return View(model);
         }
         [ActionInfo("حذف کاربر","حذف کاربر")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
-            var user = _userManager.FindByIdAsync(id.ToString()).Result;
+            var user = _userManager.FindByIdAsync(id).Result;
             if(user == null)
             {
                 return  NotFound();
@@ -154,9 +163,9 @@ namespace Webo.Core.Areas.Core.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult ConfirmDelete(int id)
+        public IActionResult ConfirmDelete(string id)
         {
-            var user = _userManager.FindByIdAsync(id.ToString()).Result;
+            var user = _userManager.FindByIdAsync(id).Result;
             if(user != null)
             {
                 var result =  _userManager.DeleteAsync(user).Result;
@@ -199,9 +208,9 @@ namespace Webo.Core.Areas.Core.Controllers
             //}
             return RedirectToAction("Edit","User",new {area="Core",id=id});
         }
-        public PartialViewResult AddUserRoleReturnPartialView(int id, int userId)
+        public PartialViewResult AddUserRoleReturnPartialView(string id, string userId)
         {
-            var role = _roleManager.FindByIdAsync(id.ToString()).Result;
+            var role = _roleManager.FindByIdAsync(id).Result;
             var user = _userManager.FindByIdAsync(userId.ToString()).Result;
             
             if(role != null && user != null)
@@ -209,8 +218,10 @@ namespace Webo.Core.Areas.Core.Controllers
                 var result = _userManager.AddToRoleAsync(user, role.Name).Result;
                 
             }
-            //var resultUser = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).Where(u => u.Id == id).FirstOrDefault();
-            return PartialView("_EditableUserRoles", new EditUserVm(user));
+			var model = new EditUserVm(user);
+			model.UserRoles = _userManager.GetRolesAsync(user).Result;
+			//var resultUser = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).Where(u => u.Id == id).FirstOrDefault();
+			return PartialView("_EditableUserRoles", model);
         }
         public PartialViewResult DeleteUserRoleReturnPartialView(int id, int userId)
         {
@@ -221,8 +232,9 @@ namespace Webo.Core.Areas.Core.Controllers
                 var result = _userManager.RemoveFromRoleAsync(user, role.Name).Result;
                 
             }
-            
-            return PartialView("_EditableUserRoles", new EditUserVm(_userManager.FindByIdAsync(userId.ToString()).Result));
+            var model = new EditUserVm(_userManager.FindByIdAsync(userId.ToString()).Result);
+			model.UserRoles = _userManager.GetRolesAsync(user).Result;
+			return PartialView("_EditableUserRoles",model);
         }
         #endregion
         

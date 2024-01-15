@@ -12,7 +12,7 @@ namespace FreeCMS.Areas.Core.ViewModels
             this.FirstName = user.FirstName;
             this.LastName = user.LastName;
             this.Active = user.Active;
-            this.UserRoles = user.UserRoles;
+            //this.UserRoles = user.UserRoles;
         }
         [Display(Name="کد")]
         public string Id { get; set; }
@@ -22,9 +22,8 @@ namespace FreeCMS.Areas.Core.ViewModels
         public string LastName { get; set; }
         [Display(Name="فعال")]
         public bool Active { get; set; }
-        [Display(Name="تصویر")]
-        public byte[] Image { get; set; }
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        
+        public virtual IList<string>? UserRoles { get; set; }
         
     }
     

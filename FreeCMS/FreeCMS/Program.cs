@@ -13,6 +13,7 @@ builder.Services.AddDbContext<
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<Role>()
+    .AddErrorDescriber<PersianIdentityErrorDescriber>()
     .AddEntityFrameworkStores<FreeCMSContext>();
 
 //builder.Services.AddIdentity<ApplicationUser,Role>(options => options.SignIn.RequireConfirmedAccount = true)
