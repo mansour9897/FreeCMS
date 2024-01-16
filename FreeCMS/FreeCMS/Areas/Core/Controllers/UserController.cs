@@ -187,25 +187,29 @@ namespace Webo.Core.Areas.Core.Controllers
             return View();
         }
         
-        public IActionResult ResetUserPassword(int id)
+        public IActionResult ResetUserPassword(string id)
         {
-            //if(id == 0)
-            //{
-            //    return NotFound();
-            //}
-            //var user = _userManager.FindByIdAsync(id.ToString()).Result;
-            //string newPassword = "Websos!!0#";
-            //ViewBag.NewPassword = newPassword;
-            //var changePasswordResult = _userManager.ChangePasswordAsync(user.Id,newPassword).Result;
-            //if(changePasswordResult.Succeeded)
-            //{
-            //    ModelState.AddModelError(string.Empty,"رمز کاربر با موفقیت تغییر کرد.");
-            //    return RedirectToAction("Edit","User",new {area="Core",id=id});
-            //}
-            //foreach(var error in changePasswordResult.Errors)
-            //{
-            //    ModelState.AddModelError(string.Empty,error.Description);
-            //}
+            if (id is null)
+            {
+                return NotFound();
+            }
+
+            var user = _userManager.FindByIdAsync(id.ToString()).Result;
+            string newPassword = "P@ssw0rd";
+            ViewBag.NewPassword = newPassword;
+            var code = _userManager.GeneratePasswordResetTokenAsync(user).Result;
+            var changePasswordResult = _userManager.ResetPasswordAsync(user, code, newPassword);
+
+            if (changePasswordResult.Result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "رمز کاربر با موفقیت تغییر کرد.");
+                return RedirectToAction("Edit", "User", new { area = "Core", id = id });
+            }
+
+            foreach (var error in changePasswordResult.Result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
             return RedirectToAction("Edit","User",new {area="Core",id=id});
         }
         public PartialViewResult AddUserRoleReturnPartialView(string id, string userId)
@@ -232,8 +236,10 @@ namespace Webo.Core.Areas.Core.Controllers
                 var result = _userManager.RemoveFromRoleAsync(user, role.Name).Result;
                 
             }
-            var model = new EditUserVm(_userManager.FindByIdAsync(userId.ToString()).Result);
-			model.UserRoles = _userManager.GetRolesAsync(user).Result;
+
+            var model = new EditUserVm(_userManager.FindByIdAsync(userId).Result);
+            if (model is not null)
+                model.UserRoles = _userManager.GetRolesAsync(user).Result;
 			return PartialView("_EditableUserRoles",model);
         }
         #endregion
