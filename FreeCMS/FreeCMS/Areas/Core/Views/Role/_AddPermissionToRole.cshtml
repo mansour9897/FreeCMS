@@ -1,0 +1,53 @@
+@model Webo.Core.Areas.Core.ViewModels.Role.EditRoleVm
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#AddPermission').click(function () {
+            var _permissionId = $('#PermissionId').val();
+            var _roleId = $('#Role_Id').val();
+
+
+            if (_permissionId == '') {
+                return false;
+            }
+
+            var _parameters = { permissionId: _permissionId, id: _roleId };
+            $.ajax({
+                url: "/Core/Role/AddPermission2RoleReturnPartialView",
+                type: "GET",
+                data: _parameters,
+                success: function (data, textStatus, jqXHR) {
+                    $('#PermissionsTable').html(data);
+                    $('#PermissionId').val("");
+                },
+                /*error: function (jqXhr, textStatus, errorMessage) { // error callback 
+                    //alert('Error: ' + errorMessage + "xhr:" + jqXhr.responseText + "status:" + jqXhr.status );
+                    alert("status:" + jqXhr.status + "***xhr:" + jqXhr.responseText);
+                }*/
+            });
+        });
+
+        $('#AddAllPermissions').click(function () {
+            var _roleId = $('#Role_Id').val();
+            var _parameters = { id: _roleId };
+            $.ajax({
+                url: "/Core/Role/AddAllPermissions2RoleReturnPartialView",
+                type: "GET",
+                data: _parameters,
+                success: function (data, textStatus, jqXHR) {
+                    $('#PermissionsTable').html(data);
+                    $('#PermissionId').val("");
+                }
+            });
+        });
+    });
+</script>
+@Html.Hidden("Role_Id", Model.Id)
+<div class="form-group">
+    <label>مجوز:</label>
+    @Html.DropDownList("PermissionId", null, string.Empty, new {@class="form-control" })
+</div>
+    
+<div class="pull-left">
+    <input class="btn btn-default " type="button" id="AddPermission" value="افزودن" /> |
+    <input class="btn btn-default " type="button" id="AddAllPermissions" value="افزودن همه مجوزها" />
+</div>
