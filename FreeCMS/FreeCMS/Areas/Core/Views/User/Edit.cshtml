@@ -90,7 +90,6 @@
 					</div><!-- ./row -->
 				</div><!-- ./box-body -->
 			</div>
-
 			<!-- ./box -->
 		}
 	</div><!-- ./col-right -->
@@ -123,44 +122,5 @@
 		});
 	</script>
 
-	<script type="text/javascript">
-		$(document).ready(function () {
-			//Unbind the original image 'href' set by the controller...
-			$('.deleteRole').attr('href', 'javascript://');
-			$('#exampleModal').on('show.bs.modal', function (event) {
-				var button = $(event.relatedTarget) // Button that triggered the modal
-				var recipient = button.data('whatever') // Extract info from data-* attributes
-				var roleName = button.attr("roleName");
-				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-				var modal = $(this)
-				modal.find('#btn-role-delete').attr('data-roleid', recipient);
-				modal.find('#role-info').html(roleName);
-			});
-			$("#exampleModal").on('hidden.bs.modal', function () {
-				$(this).data('bs.modal', null);
-			});
-			$("#btn-role-delete").click(function () {
-
-				var _userId = @Model.Id.ToString();
-				var _id = $(this).data('roleid');
-				console.log(_userId);
-				console.log(_id);
-				var _parameters = { userId: _userId, id: _id };
-				console.log(_parameters);
-				$.ajax({
-					url: "/Core/User/DeleteUserRoleReturnPartialView",
-					type: "GET",
-					data: _parameters,
-					success: function (data, textStatus, jqXHR) {
-						$('#RolesTable').html(data);
-						$('#exampleModal').modal('hide');
-						$(".modal-backdrop").remove();
-					}
-				});
-				$('#exampleModal').modal('hide');
-				$(".modal-backdrop").remove();
-			});
-		})
-	</script>
+	
 }

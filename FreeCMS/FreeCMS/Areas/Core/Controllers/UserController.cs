@@ -223,9 +223,9 @@ namespace Webo.Core.Areas.Core.Controllers
 			//var resultUser = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).Where(u => u.Id == id).FirstOrDefault();
 			return PartialView("_EditableUserRoles", model);
         }
-        public PartialViewResult DeleteUserRoleReturnPartialView(int id, int userId)
+        public PartialViewResult DeleteUserRoleReturnPartialView(string roleName, string userId)
         {
-            var role = _roleManager.FindByIdAsync(id.ToString()).Result;
+            var role = _roleManager.FindByNameAsync(roleName).Result;//.FindByIdAsync(id.ToString()).Result;
             var user = _userManager.FindByIdAsync(userId.ToString()).Result;
             if(role != null && user != null)
             {
