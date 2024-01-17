@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using FreeCMS.Extensions;
 using FreeCMS.DomainModels.Identity;
 using FreeCMS.DAL;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
+using FreeCMS;
+using FreeCMS.Service.System.Abstraction;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,8 +51,12 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+//var ctrl = FreeCmsBootstrapper.GetAllPermissions();
+
 var sc = app.Services.CreateScope();
-IDbInitializer dbInitializer = sc.ServiceProvider.GetRequiredService<IDbInitializer>(); 
+IDbInitializer dbInitializer = sc.ServiceProvider.GetRequiredService<IDbInitializer>();
 dbInitializer.InitializeAsync();
+FreeCmsBootstrapper.AddPermissions(sc.ServiceProvider.GetRequiredService<IPermissionService>());
 app.Run();
+
 

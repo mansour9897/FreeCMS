@@ -1,5 +1,5 @@
 using System;
-namespace FreeCMS.Attributes
+namespace FreeCMS.Extensions.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = true)]
     public class ActionInfoAttribute : Attribute

@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace FreeCMS.Areas.Core.ViewModels.Role
+namespace FreeCMS.Areas.Core.ViewModels
 {
     public class AddRoleVm
     {

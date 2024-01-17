@@ -1,10 +1,10 @@
-@model IPagedList<Webo.DomainClass.AccountModels.WeboRole>
+@model IPagedList<FreeCMS.DomainModels.Identity.Role>
 @using X.PagedList.Mvc.Core; 
 @using X.PagedList;
 
 @{
     ViewData["Title"] = "نقش ها";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
 <div>
     <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
@@ -42,7 +42,7 @@
                             {
                                 <tr>
                                     <td>@role.Name</td>
-                                    <td>@role.IsAdmin.ToPersianString()</td>
+                                    @*<td>@role.IsAdmin.ToPersianString()</td>*@
                                     <td>@role.Description</td>
                                     <td>
                                         @Html.ActionLink("ویرایش", "Edit", new { id = role.Id }, new { @class = "btn btn-default" }) |

@@ -2,28 +2,30 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
-using FreeCMS.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using FreeCMS.Service.System.Abstraction;
 using FreeCMS.DomainModels.Identity;
+using FreeCMS.Areas.Core.ViewModels;
+using FreeCMS.Service.System.Implemented;
+using FreeCMS.Extensions.Attributes;
 
-namespace Webo.Core.Areas.Core.Controllers
+namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
     [Authorize]
-    [ControllerInfo("مدیریت نقش")]
+    [ControllerInfo("مدیریت نقش","سیستم")]
     public class RoleController : Controller
     {
         #region variables ...
-        private readonly RoleManager<Role> _roleManager;
+        private readonly FreeCmsRoleManager _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPermissionService _permissionService;
         #endregion
 
         #region constructors ...
-        public RoleController(UserManager<ApplicationUser> userManager, RoleManager<Role> roleManager, IPermissionService permissionService)
+        public RoleController(UserManager<ApplicationUser> userManager, FreeCmsRoleManager roleManager, IPermissionService permissionService)
         {
             this._roleManager = roleManager;
             this._userManager = userManager;
@@ -51,7 +53,7 @@ namespace Webo.Core.Areas.Core.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newRole = new WeboRole { Name = model.Name, Description = model.Description, IsAdmin = model.IsAdmin };
+                var newRole = new Role { Name = model.Name, Description = model.Description, IsAdmin = model.IsAdmin };
                 var result = _roleManager.CreateAsync(newRole).Result;
                 if (result.Succeeded)
                 {
@@ -65,7 +67,7 @@ namespace Webo.Core.Areas.Core.Controllers
             return View(model);
         }
         [ActionInfo("مشاهده جزییات نقش", "مشاهده مجوزها، کاربران")]
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
             var role = _roleManager.FindByIdAsync(id.ToString()).Result;
             if (role == null)
@@ -74,8 +76,9 @@ namespace Webo.Core.Areas.Core.Controllers
             }
             return View(new RoleDetailsVm(role));
         }
+        
         [ActionInfo("ویرایش نقش", "ویرایش نام، مجوزها و کاربران")]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             ViewBag.PermissionId = new SelectList(this.GetPermissions(), "Id", "FullDisplayName");
             var role = _roleManager.FindByIdAsync(id.ToString()).Result;
@@ -108,7 +111,7 @@ namespace Webo.Core.Areas.Core.Controllers
             return View(model);
         }
         [ActionInfo("حذف نقش", "حذف نقش به همراه همه مجوزها")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var role = _roleManager.FindByIdAsync(id.ToString()).Result;
             if (role == null)
@@ -120,7 +123,7 @@ namespace Webo.Core.Areas.Core.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult ConfirmDelete(int id)
+        public IActionResult ConfirmDelete(string id)
         {
             var role = _roleManager.FindByIdAsync(id.ToString()).Result;
             if (role == null)
@@ -130,7 +133,7 @@ namespace Webo.Core.Areas.Core.Controllers
             var result = _roleManager.DeleteAsync(role).Result;
             return RedirectToAction("Index", "Role", new { area = "Core" });
         }
-        public PartialViewResult AddPermission2RoleReturnPartialView(int id, int permissionId)
+        public PartialViewResult AddPermission2RoleReturnPartialView(string id, int permissionId)
         {
             _roleManager.AddPermissionToRole(id, permissionId);
             //var resultRole = new EditRoleVm(_roleManager.FindByIdAsync(id.ToString()).Result);
@@ -138,13 +141,13 @@ namespace Webo.Core.Areas.Core.Controllers
                .Where(r => r.Id == id).FirstOrDefault());
             return PartialView("_EditableRolePermissionsList", resultRole);
         }
-        public PartialViewResult AddAllPermissions2RoleReturnPartialView(int id)
+        public PartialViewResult AddAllPermissions2RoleReturnPartialView(string id)
         {
             var permissionIds = _permissionService.GetPermissions().Select(p => p.Id).ToList();
             _roleManager.AddPermissionsToRole(id, permissionIds);
             return PartialView("_EditableRolePermissionsList", new EditRoleVm(_roleManager.FindByIdAsync(id.ToString()).Result));
         }
-        public PartialViewResult DeletePermissionFromRoleReturnPartialView(int id, int permissionId)
+        public PartialViewResult DeletePermissionFromRoleReturnPartialView(string id, int permissionId)
         {
             _roleManager.RemovePermissionFromRole(id, permissionId);
             return PartialView("_EditableRolePermissionsList", new EditRoleVm(_roleManager.FindByIdAsync(id.ToString()).Result));

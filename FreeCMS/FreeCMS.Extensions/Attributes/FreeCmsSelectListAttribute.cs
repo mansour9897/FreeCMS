@@ -1,5 +1,4 @@
-using System;
-namespace FreeCMS.Attributes
+namespace FreeCMS.Extensions.Attributes
 {
     [AttributeUsage(AttributeTargets.Class,Inherited=false,AllowMultiple=false)]
     public class FreeCmsSelectListAttribute:Attribute

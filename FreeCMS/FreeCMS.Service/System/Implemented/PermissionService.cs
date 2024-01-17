@@ -30,7 +30,7 @@ namespace FreeCMS.Service.System
         {
             return this.PermissionExist(permission.AssemblyName, permission.AreaName, permission.ControllerName, permission.ActionName);
         }
-        public bool PermissionExist(string assemblyName,string areaName,string controllerName,string actionName)
+        public bool PermissionExist(string assemblyName, string areaName, string controllerName, string actionName)
         {
             Permission per = _permRepo.List().Where(p => p.AssemblyName == assemblyName && p.AreaName == areaName && p.ControllerName == controllerName &&
                 p.ActionName == actionName).FirstOrDefault();
@@ -48,11 +48,11 @@ namespace FreeCMS.Service.System
         }
         public void RemovePermissionsByAssembleyName(string assemblyName)
         {
-            var permissions = _permRepo.List(p => p.AssemblyName == assemblyName);
-            foreach (var per in permissions)
-            {
-                this.RemovePermission(per.Id);
-            }
+            //var permissions = _permRepo.List(p => p.AssemblyName == assemblyName);
+            //foreach (var per in permissions)
+            //{
+            //    this.RemovePermission(per.Id);
+            //}
         }
         public List<Permission> GetPermissions()
         {

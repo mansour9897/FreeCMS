@@ -7,19 +7,18 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using X.PagedList;
 using FreeCMS.DomainModels.Identity;
 using Microsoft.AspNetCore.Identity;
-using FreeCMS.Attributes;
 using FreeCMS.Service.Filters;
 using Microsoft.AspNetCore.Authorization;
 
 using FreeCMS.Areas.Core.ViewModels;
-
+using FreeCMS.Extensions.Attributes;
 
 namespace Webo.Core.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
     [Authorize]
-    [ControllerInfo("مدیریت کاربران")]
+    [ControllerInfo("مدیریت کاربران", "سیستم")]
     public class UserController:Controller
     {
         #region variables ...

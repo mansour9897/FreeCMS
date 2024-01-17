@@ -1,8 +1,11 @@
 ﻿using FreeCMS.Repository.CMS.Abstraction;
 using FreeCMS.Repository.CMS.Implemented;
+using FreeCMS.Repository.System;
 using FreeCMS.Service.CMS.Abstraction;
 using FreeCMS.Service.CMS.Implemented;
-using Microsoft.EntityFrameworkCore.Query;
+using FreeCMS.Service.System;
+using FreeCMS.Service.System.Abstraction;
+using FreeCMS.Service.System.Implemented;
 
 namespace FreeCMS.Extensions
 {
@@ -21,6 +24,10 @@ namespace FreeCMS.Extensions
 			services.AddScoped<IPostTopicRepository,PostTopicRepository>();
 			services.AddScoped<IGalleryItemRepository,GalleryItemRepository>();
 			services.AddScoped<IGalleryItemService,GalleryItemService>();
-		}
+			services.AddScoped<FreeCmsRoleManager>();
+			services.AddScoped<IPermissionService, PermissionService>();
+			services.AddScoped<IPermissionRepository,PermissionRepository>();
+
+        }
 	}
 }
