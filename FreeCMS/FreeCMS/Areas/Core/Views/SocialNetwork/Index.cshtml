@@ -1,0 +1,67 @@
+@model IPagedList<FreeCMS.DomainModels.System.SocialNetwork>
+@using X.PagedList.Mvc.Core; 
+@using X.PagedList;
+@{
+    ViewData["Title"] = "مدیریت شبکه های اجتماعی";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+                <div class="box-tools pull-left">
+                    <a href="@Url.Action("Create","SocialNetwork",new{area="Core"})" class="btn btn-danger">شبکه جدید</a>
+                </div>
+            </div>
+            <div class="box-body">
+                @if(Model != null && Model.Count > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>تصویر</th>
+                                <th>نام</th>
+                                <th>تاریخ ایجاد</th>
+                                <th>فعالیت ها</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var socialLink in Model)
+                            {
+                                <tr>
+                                    <td><img src="@socialLink.Image" alt="@socialLink.Name" class="img-responsive webo-user-image-table"></td>
+                                    <td>@socialLink.Name</td>
+                                    <td>@socialLink.CreationDate</td>
+                                    <td>
+                                        @Html.ActionLink("ویرایش", "Edit", new { area="Core", id = socialLink.Id }, new { @class = "btn btn-default" }) |
+                                        @Html.ActionLink("جزییات", "Details", new { area="Core", id = socialLink.Id }, new { @class = "btn btn-default" }) |
+                                        @Html.ActionLink("حذف", "Delete", new { area="Core",id = socialLink.Id }, new { @class = "btn btn-danger" }) 
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h4 class="text-center">هیچ شبکه اجتماعی ثبت نشده است. </h4>
+                }
+            </div>
+            <div class="box-footer text-center">
+                @*Html.PagedListPager(Model,page => Url.Action("Index",new { page}))*@
+                @Html.PagedListPager(Model,page => Url.Action() + "?page=" + page)
+            </div>
+        </div>
+    </div>
+</div>

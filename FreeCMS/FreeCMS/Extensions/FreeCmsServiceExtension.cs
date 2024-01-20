@@ -34,6 +34,8 @@ namespace FreeCMS.Extensions
             services.AddScoped<IContactMessageService, ContactMessageService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ISocialNetworkRepository, SocialNetworkRepository>();
+            services.AddScoped<ISocialNetworkService, SocialNetworkService>();
 
         }
     }
