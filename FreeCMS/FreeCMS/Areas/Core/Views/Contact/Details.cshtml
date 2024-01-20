@@ -1,0 +1,50 @@
+@model FreeCMS.DomainModels.System.ContactMessage
+@{
+    ViewData["Title"] = "مشاهده پیام";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Contact", new { area="Core"})">مدیریت نقش</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">دسترسی ها</h3>
+            </div>
+            <div class="box-body">
+                @Html.ActionLink("فهرست", "Index", "Contact", new { area = "Core" }, new { @class = "btn btn-default" }) |
+                @Html.ActionLink("حذف", "Delete", "Contact", new { area = "Core", Id = Model.Id }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>    <!-- ./functions -->
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-md-pull-4 col-lg-pull-4">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+            </div><!--  ./box-header -->
+            <div class="box-body">
+                <dl>
+                    <dt>نام</dt>
+                    <dd>@Model.Name</dd>
+                    <dt>ایمیل</dt>
+                    <dd>@Model.Email</dd>
+                    <dt>پیام</dt>
+                    <dd>@Model.Content</dd>
+                </dl>
+            </div><!-- ./box-body -->
+        </div><!-- ./box -->
+        
+        
+    </div><!-- ./info -->
+</div><!-- ./row -->
