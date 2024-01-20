@@ -1,0 +1,175 @@
+@model FreeCMS.Areas.Core.ViewModels.Analytic.StatisticsViewModel
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">آمار بازدیدها</h3>
+    </div><!-- ./box-header -->
+    <div class="box-body">
+        @if(Model != null)
+        {
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#lastWeek" aria-controls="lastWeek" role="tab" data-toggle="tab">7 روز گذشته</a></li>
+                <li role="presentation"><a href="#lastMonth" aria-controls="lastMonth" role="tab" data-toggle="tab">30 روز گذشته</a></li>
+                <li role="presentation"><a href="#lastThreeMonth" aria-controls="lastThreeMonth" role="tab" data-toggle="tab">90 روز گذشته</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="lastWeek">
+                    <canvas id="LastWeekViewChart"></canvas>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="lastMonth">
+                    <canvas id="LastMonthViewChart"></canvas>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="lastThreeMonth">
+                    <canvas id="LastThreeMonthViewChart"></canvas>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="tex-center">
+                <h4>داده ای برای نمایش وجود ندارد.</h4>
+            </div>
+        }
+    </div><!-- ./box-bosy -->
+</div><!-- ./box -->
+<script>
+    Chart.plugins.unregister(ChartDataLabels);
+    Chart.defaults.global.defaultFontFamily = "BKoodak";
+
+    var lastWeekCtx = document.getElementById('LastWeekViewChart').getContext('2d');
+    var lastWeekChart = new Chart(lastWeekCtx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: @Html.Raw(Model.LastWeek.Visits.Labels),
+            datasets: [{
+                label: "@Html.Raw(Model.LastWeek.Visits.Label)",
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: @Html.Raw(Model.LastWeek.Visits.Data)
+            },{
+                label: "@Html.Raw(Model.LastWeek.Visitors.Label)",
+                fill: false,
+                backgroundColor: 'rgb(54, 162, 235)',
+                borderColor: 'rgb(54, 162, 235)',
+                data: @Html.Raw(Model.LastWeek.Visitors.Data)
+            }
+            ]
+        },
+
+        // Configuration options go here
+        options: {responsive: true,
+            barPercentage: 0.5,
+            categoryPercentage:1,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        minRotation:50
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    Chart.plugins.unregister(ChartDataLabels);
+
+    var lastMonthCtx = document.getElementById('LastMonthViewChart').getContext('2d');
+    var lastMonthChart = new Chart(lastMonthCtx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: @Html.Raw(Model.LastMonth.Visits.Labels),
+            datasets: [{
+                label: "@Html.Raw(Model.LastMonth.Visits.Label)",
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: @Html.Raw(Model.LastMonth.Visits.Data)
+            },{
+                label: "@Html.Raw(Model.LastMonth.Visitors.Label)",
+                fill: false,
+                backgroundColor: 'rgb(54, 162, 235)',
+                borderColor: 'rgb(54, 162, 235)',
+                data: @Html.Raw(Model.LastMonth.Visitors.Data)
+            }
+            ]
+        },
+
+        // Configuration options go here
+        options: {responsive: true,
+            barPercentage: 0.5,
+            categoryPercentage:1,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        minRotation:50
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    Chart.plugins.unregister(ChartDataLabels);
+
+    var lastThreeMonthCtx = document.getElementById('LastThreeMonthViewChart').getContext('2d');
+    var lastThreeMonthChart = new Chart(lastThreeMonthCtx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: @Html.Raw(Model.LastThreeMonth.Visits.Labels),
+            datasets: [{
+                label: "@Html.Raw(Model.LastThreeMonth.Visits.Label)",
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: @Html.Raw(Model.LastThreeMonth.Visits.Data)
+            },{
+                label: "@Html.Raw(Model.LastThreeMonth.Visitors.Label)",
+                fill: false,
+                backgroundColor: 'rgb(54, 162, 235)',
+                borderColor: 'rgb(54, 162, 235)',
+                data: @Html.Raw(Model.LastThreeMonth.Visitors.Data)
+            }
+            ]
+        },
+
+        // Configuration options go here
+        options: {responsive: true,
+            barPercentage: 0.5,
+            categoryPercentage:1,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        minRotation:50
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,                        
+                    }
+                }]
+            }
+        }
+    });
+</script>

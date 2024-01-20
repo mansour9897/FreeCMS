@@ -1,0 +1,43 @@
+@model FreeCMS.Areas.Core.ViewComponents.Analytics.AnalyticSummaryViewModel
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">خلاصه</h3>
+    </div><!-- ./box-header -->
+    <div class="box-body">
+        <h4>افراد آنلاین: @Model.OnlineUsersCount</h4>
+        <div class="responsive-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>بازدیدکننده</th>
+                        <th>بازدید</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>امروز:</td>
+                        <td>@Model.TodayVisitorsCount</td>
+                        <td>@Model.TodayVisitsCount</td>
+                    </tr>
+                    <tr>
+                        <td>دیروز:</td>
+                        <td>@Model.YesterdayVisitorsCount</td>
+                        <td>@Model.YesterdayVisitsCount</td>
+                    </tr>
+                    <tr>
+                        <td>7 روز گذشته:</td>
+                        <td>@Model.LastWeekVisitorsCount</td>
+                        <td>@Model.LastWeekVisitsCount</td>
+                    </tr>
+                    <tr>
+                        <td>30 روز گذشته:</td>
+                        <td>@Model.LastMonthVisitorsCount</td>
+                        <td>@Model.LastMonthVisitsCount</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div><!-- ./responsive-table -->
+    </div><!-- ./box-bosy -->
+</div><!-- ./box -->

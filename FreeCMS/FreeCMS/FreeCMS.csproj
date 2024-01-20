@@ -41,6 +41,7 @@
     <Folder Include="Areas\Cms\Models\" />
     <Folder Include="Areas\Core\Data\" />
     <Folder Include="Areas\Core\Models\" />
+    <Folder Include="Areas\Core\Views\Shared\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="Pages\" />
