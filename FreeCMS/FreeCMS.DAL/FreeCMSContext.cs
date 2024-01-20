@@ -22,6 +22,7 @@ namespace FreeCMS.DAL
 		public DbSet<PostTopic> PostTopics { get; set; }
 		public DbSet<Slide> Slides { get; set; }
 		public DbSet<ContactMessage> ContactMessages { get; set; }
+		public DbSet<Comment> Comments { get; set; }
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
