@@ -81,13 +81,17 @@ namespace FreeCMS.Areas.Core.Controllers
         public IActionResult Edit(string id)
         {
             ViewBag.PermissionId = new SelectList(this.GetPermissions(), "Id", "FullDisplayName");
-            var role = _roleManager.FindByIdAsync(id.ToString()).Result;
+            var role = _roleManager.Roles.Include(r => r.RolePermissions)
+                 .ThenInclude(rp => rp.Permission)
+                 .Where(r => r.Id == id)
+                 .FirstOrDefault();
             if (role == null)
             {
                 return NotFound();
             }
             return View(new EditRoleVm(role));
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(EditRoleVm model)
@@ -111,6 +115,7 @@ namespace FreeCMS.Areas.Core.Controllers
             return View(model);
         }
         [ActionInfo("حذف نقش", "حذف نقش به همراه همه مجوزها")]
+        
         public IActionResult Delete(string id)
         {
             var role = _roleManager.FindByIdAsync(id.ToString()).Result;
@@ -120,6 +125,7 @@ namespace FreeCMS.Areas.Core.Controllers
             }
             return View(new RoleDetailsVm(role));
         }
+        
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -133,29 +139,43 @@ namespace FreeCMS.Areas.Core.Controllers
             var result = _roleManager.DeleteAsync(role).Result;
             return RedirectToAction("Index", "Role", new { area = "Core" });
         }
+        
         public PartialViewResult AddPermission2RoleReturnPartialView(string id, int permissionId)
         {
             _roleManager.AddPermissionToRole(id, permissionId);
-            //var resultRole = new EditRoleVm(_roleManager.FindByIdAsync(id.ToString()).Result);
-            var resultRole = new EditRoleVm(_roleManager.Roles.Include(r => r.RolePermissions).ThenInclude(rp => rp.Permission)
-               .Where(r => r.Id == id).FirstOrDefault());
-            return PartialView("_EditableRolePermissionsList", resultRole);
+            return CallEditableRolePermissionList(id);
         }
+        
         public PartialViewResult AddAllPermissions2RoleReturnPartialView(string id)
         {
             var permissionIds = _permissionService.GetPermissions().Select(p => p.Id).ToList();
             _roleManager.AddPermissionsToRole(id, permissionIds);
             return PartialView("_EditableRolePermissionsList", new EditRoleVm(_roleManager.FindByIdAsync(id.ToString()).Result));
         }
+        
         public PartialViewResult DeletePermissionFromRoleReturnPartialView(string id, int permissionId)
         {
             _roleManager.RemovePermissionFromRole(id, permissionId);
-            return PartialView("_EditableRolePermissionsList", new EditRoleVm(_roleManager.FindByIdAsync(id.ToString()).Result));
+            return CallEditableRolePermissionList(id);
         }
         #endregion
 
         #region methods ...
         public List<Permission> GetPermissions() => _permissionService.GetPermissions();
+        private PartialViewResult CallEditableRolePermissionList(string roleId)
+        {
+            var role = _roleManager.Roles.Include(r => r.RolePermissions)
+                .ThenInclude(rp => rp.Permission)
+                .Where(r => r.Id == roleId)
+                .FirstOrDefault();
+            if(role == null)
+            {
+                return PartialView("_EditableRolePermissionsList", null);
+            }
+            //var resultRole = new EditRoleVm(_roleManager.FindByIdAsync(id.ToString()).Result);
+            var resultRole = new EditRoleVm(role);
+            return PartialView("_EditableRolePermissionsList", resultRole);
+        }
         #endregion
     }
 

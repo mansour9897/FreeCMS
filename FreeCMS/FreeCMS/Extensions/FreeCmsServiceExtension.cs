@@ -27,6 +27,8 @@ namespace FreeCMS.Extensions
 			services.AddScoped<FreeCmsRoleManager>();
 			services.AddScoped<IPermissionService, PermissionService>();
 			services.AddScoped<IPermissionRepository,PermissionRepository>();
+			services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
+			services.AddScoped<IRolePermissionServices, RolePermissionService>();
 
         }
 	}

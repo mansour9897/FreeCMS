@@ -1,4 +1,5 @@
 ﻿using FreeCMS.DomainModels.Identity;
+using FreeCMS.Service.System.Abstraction;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
@@ -6,13 +7,16 @@ namespace FreeCMS.Service.System.Implemented
 {
     public class FreeCmsRoleManager : RoleManager<Role>
     {
+        private readonly IRolePermissionServices _rolePermissionServices;
         public FreeCmsRoleManager(IRoleStore<Role> store,
                                   IEnumerable<IRoleValidator<Role>> roleValidators, 
                                   ILookupNormalizer keyNormalizer, 
                                   IdentityErrorDescriber errors, 
-                                  ILogger<RoleManager<Role>> logger) 
+                                  ILogger<RoleManager<Role>> logger,
+                                  IRolePermissionServices rolePermissionServices) 
             : base(store, roleValidators, keyNormalizer, errors, logger)
         {
+            _rolePermissionServices = rolePermissionServices;
         }
 
 
@@ -22,6 +26,7 @@ namespace FreeCMS.Service.System.Implemented
             try
             {
                 var role = this.FindByIdAsync(roleId.ToString()).Result;
+                role.RolePermissions = _rolePermissionServices.GetByRolesId(roleId);
                 if (role != null)
                 {
                     var rolePermission = role.RolePermissions.Where(rp => rp.RoleId == roleId && rp.PermissionId == permissionId)
@@ -41,12 +46,22 @@ namespace FreeCMS.Service.System.Implemented
             }
             return result;
         }
+        public void AddPermissionsToRole(string roleId, List<int> permissionIds)
+        {
+            foreach (var permissionId in permissionIds)
+            {
+                this.AddPermissionToRole(roleId, permissionId);
+
+            }
+        }
+
         public bool RemovePermissionFromRole(string roleId, int permissionId)
         {
             bool result = false;
             try
             {
                 var role = this.FindByIdAsync(roleId.ToString()).Result;
+                role.RolePermissions = _rolePermissionServices.GetByRolesId(roleId);
                 if (role != null)
                 {
                     var rolePermission = role.RolePermissions.Where(rp => rp.RoleId == roleId && rp.PermissionId == permissionId)
@@ -65,14 +80,6 @@ namespace FreeCMS.Service.System.Implemented
                 throw e;
             }
             return result;
-        }
-        public void AddPermissionsToRole(string roleId, List<int> permissionIds)
-        {
-            foreach (var permissionId in permissionIds)
-            {
-                this.AddPermissionToRole(roleId, permissionId);
-
-            }
         }
     }
 }
