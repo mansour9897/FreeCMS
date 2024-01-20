@@ -11,7 +11,6 @@ namespace FreeCMS.DomainModels.Identity
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-
 		public string AssemblyName { get; set; }
 		public string AreaName { get; set; }
 		public string AreaNameShow { get; set; }

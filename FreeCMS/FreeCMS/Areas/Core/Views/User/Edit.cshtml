@@ -1,0 +1,126 @@
+@model FreeCMS.Areas.Core.ViewModels.EditUserVm
+@{
+	ViewData["Title"] = "ویرایش اطلاعات کاربر";
+	Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+	<ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+		<li>
+			<a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+		</li>
+		<li>
+			<a href="@Url.Action("Index", "User", new { area="Core"})">مدیریت کاربران</a>
+		</li>
+		<li>
+			<span>@ViewData["Title"]</span>
+		</li>
+	</ol>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+		<div class="box box-solid ">
+			<div class="box-header with-border">
+				<h3 class="box-title">ریست رمز کاربر</h3>
+			</div><!-- ./box-header -->
+			<div class="box-body">
+				<p>با زدن این دکمه رمز کاربر به یک مقدار پیش فرض تغییر می کند.</p>
+				<p>رمز پیش فرض: @ViewBag.NewPassword</p>
+				<a href="@Url.Action("ResetUserPassword","User",new{area="Core",id=Model.Id})" class="btn btn-danger">ریست رمز کاربر</a>
+			</div><!-- ./box-body -->
+		</div><!-- ./box -->
+		<div class="box box-solid ">
+			<div class="box-header with-border">
+				<h3 class="box-title">افزودن نقش</h3>
+			</div><!-- ./box-header -->
+			<div class="box-body">
+				@Html.Partial("_AddRole", Model)
+			</div><!-- ./box-body -->
+		</div><!-- ./box -->
+		<div class="box box-solid collapsed-box">
+			<div class="box-header with-border">
+				<h3 class="box-title">نقش ها</h3>
+				<div class="box-tools pull-left">
+					<button class="btn btn-box-tool" data-widget="collapse">
+						<span class="fa fa-plus"></span>
+					</button>
+				</div>
+			</div><!-- ./box-header -->
+			<div class="box-body">
+				@Html.Partial("_EditableUserRoles", Model)
+			</div><!-- ./box-body -->
+		</div><!-- ./box -->
+	</div><!-- ./ col-left -->
+	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-pull-4 col-lg-pull-4">
+		@using (Html.BeginForm("Edit", "User", new { area = "Core" }, FormMethod.Post, false, null))
+		{
+			@Html.AntiForgeryToken()
+			@Html.HiddenFor(model => model.Id)
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">@ViewData["Title"]</h3>
+				</div>
+				<div class="box-body">
+					@Html.ValidationSummary(true)
+					<div class="row">
+						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 text-center">
+							@*<img src="@userImageService.ShowUserImage(Model.Image)" alt="" class="center-block img-circle webo-user-image-page" >*@
+							<a href="@Url.Action("ChangeImage","User",new{area="Core",id=Model.Id})" class="btn btn-default btn-block webo-mt-40">ویرایش تصویر</a>
+						</div>
+						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+							<div class="form-group">
+								@Html.LabelFor(model => model.FirstName)
+								@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.FirstName)
+							</div>
+							<div class="form-group">
+								@Html.LabelFor(model => model.LastName)
+								@Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.LastName)
+							</div>
+							<div class="form-group">
+								@Html.Label("فعال")
+								@Html.EditorFor(model => model.Active, new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.Active)
+							</div>
+							<div class="pull-left">
+								@Html.ActionLink("انصراف", "Index", "User", new { area = "Core" }, new { @class = "btn btn-default" }) |
+								<input type="submit" value="ذخیره" class="btn btn-success" />
+							</div>
+						</div>
+					</div><!-- ./row -->
+				</div><!-- ./box-body -->
+			</div>
+			<!-- ./box -->
+		}
+	</div><!-- ./col-right -->
+
+</div><!-- ./row -->
+@section Scripts{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(":input[type='button']").button();
+			$('#AddRole').click(function () {
+				
+				var _userId = $('#UserId').val();
+				var _id = $('#RoleId').val();
+				
+				if (_userId == '') {
+					return false;
+				}
+				
+				var _parameters = { userId: _userId, id: _id };
+				
+				$.ajax({
+					url: "/Core/User/AddUserRoleReturnPartialView",
+					type: "GET",
+					data: _parameters,
+					success: function (data, textStatus, jqXHR) {
+						$('#RolesTable').html(data);
+					}
+				});
+			});
+		});
+	</script>
+
+	
+}

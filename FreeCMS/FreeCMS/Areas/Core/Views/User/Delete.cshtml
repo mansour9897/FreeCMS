@@ -1,0 +1,71 @@
+@model FreeCMS.Areas.Core.ViewModels.UserDetails
+@{
+    ViewData["Title"] = "حذف کاربر";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "User", new { area="Core"})">مدیریت کاربران</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">حذف</h3>
+            </div><!-- ./box-header -->
+            <div class="box-body">
+                <p>آیا از حذف این کاربر مطمئن هستید؟</p>
+                @using (Html.BeginForm())
+                {
+                    <text>
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => Model.Id)
+                        @Html.ActionLink("انصراف", "Index", "User", new { area = "Core" }, new { @class = "btn btn-default" }) |
+                        <input type="submit" value="حذف" class="btn btn-danger" />
+                    </text>
+
+                }
+            </div><!-- ./box-body -->
+        </div><!-- ./box -->
+    </div><!-- ./ col-left -->
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-pull-4 col-lg-pull-4">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 text-center">
+                        @*<img src="@userImageService.ShowUserImage(Model.Image)" alt="" class="center-block img-circle webo-user-image-page" >*@
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+                        <h2>@Model.FullName</h2>
+                        <dl>
+                            <dt>نام کاربری</dt>
+                            <dd>@Model.UserName</dd>
+                            <dt>شروع عضویت</dt>
+                            <dd>@Model.RegisterDate.Date.ToShortDateString()</dd>
+                            <dt>ایمیل</dt>
+                            <dd>@Model.Email</dd>
+                            <dt>شماره موبایل</dt>
+                            <dd>@Model.MobileNumber</dd>
+                            <dt>فعال است؟</dt>
+                            @*<dd>@Model.Active.ToPersianString()</dd>*@
+                            <dt></dt>
+                            <dd style="padding-top:10px;">@Html.Partial("_UserRoles",Model)</dd>
+                        </dl>
+                    </div>
+                </div><!-- ./row -->
+            </div><!-- ./box-body -->
+        </div><!-- ./box -->
+    </div><!-- ./col-right -->
+</div><!-- ./row -->

@@ -34,9 +34,10 @@
 	<link rel="stylesheet" href="~/lib/adminlte/css/adminltefix.css" />
 	<link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
 	<link rel="stylesheet" href="~/css/admin.css" />
+	<script src="~/lib/adminlte/js/jquery-1.11.0.js"></script>
 	@RenderSection("Head", false)
 </head>
-<body class="skin-purple-light sidebar-mini">
+<body class="skin-red sidebar-mini">
 	<div class="wrapper">
 
 		<!-- Main Header -->
@@ -71,9 +72,9 @@
 								<span class="hidden-xs mx-4">@displayName</span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">ویرایش پروفایل</a></li>
-								<li><a class="dropdown-item" href="#">تغییر رمز عبور</a></li>
-								<li><a class="dropdown-item" href="#">ویرایش ایمیل</a></li>
+								<li><a class="dropdown-item" asp-area="" asp-controller="Profile" asp-action="Edit">ویرایش پروفایل</a></li>
+								<li><a class="dropdown-item" asp-area="" asp-controller="Profile" asp-action="ChangePassword">تغییر رمز عبور</a></li>
+								<li><a class="dropdown-item" asp-area="" asp-controller="Profile" asp-action="ChangeEmail">ویرایش ایمیل</a></li>
 								<hr class="my-2">
 								<!-- Menu Footer-->
 								<li class="user-footer mx-3">
@@ -99,6 +100,13 @@
 							<i class="fas fa-tachometer-alt"></i>
 							&nbsp;
 							<span>داشبورد</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a asp-area="Core" asp-controller="Admin" asp-action="Index" class="nav-link">
+							<i class="fas fa-cogs"></i>
+							&nbsp;
+							<span>تنظیمات سیستم</span>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -139,7 +147,7 @@
 			<strong>کپی رایت &copy; @DateTime.Now.Year <a asp-area="" asp-controller="Home" asp-action="Index"></a></strong> تمام حقوق برای گروه نرم افزاری ترنج محفوظ است.
 		</footer>
 	</div><!-- ./wrapper -->
-	<script src="~/lib/adminlte/js/jquery-1.11.0.js"></script>
+	
 	<script src="~/lib/adminlte/js/bootstrap.js"></script>
 	<script src="~/lib/adminlte/js/app.js"></script>
 	@RenderSection("Scripts", required: false)

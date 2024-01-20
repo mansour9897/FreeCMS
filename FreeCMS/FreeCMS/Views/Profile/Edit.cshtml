@@ -1,0 +1,43 @@
+@model FreeCMS.ViewModels.Profile.EditUserInfoVm
+@{
+    ViewData["Title"] = "ویرایش پروفایل";
+    Layout ="~/Views/Shared/_PanelLayout.cshtml";
+}
+<div class="row">
+    @using(Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-push-8 col-lg-push-8">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">ذخیره اطلاعات</h3>
+                </div>
+                <div class="box-body">
+                    <p>اطلاعات خود را ذخیره نمایید.</p>
+                    @Html.ActionLink("انصراف", "Index", "Profile", new { area = "" }, new { @class = "btn btn-default"}) |
+                    <input type="submit" value="ذخیره" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-pull-4 col-lg-pull-4">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@ViewData["Title"]</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName)
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName)
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>

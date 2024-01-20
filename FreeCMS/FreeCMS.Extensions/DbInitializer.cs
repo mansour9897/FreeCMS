@@ -1,5 +1,10 @@
 ﻿using FreeCMS.DomainModels.Identity;
+using FreeCMS.Extensions.Attributes;
+using FreeCMS.Extensions.Models;
+using FreeCMS.Service.System;
 using Microsoft.AspNetCore.Identity;
+using System.Reflection;
+using System.Web.Mvc;
 
 namespace FreeCMS.Extensions
 {
@@ -16,36 +21,53 @@ namespace FreeCMS.Extensions
 
         public async void InitializeAsync()
         {
-            string roleName = "مدیر ارشد";
+            string _roleName = "مدیر ارشد";
+            string userEmail = "admin@freecms.com";
+            string password = "Fr33cm5!!";
+
+            await AddAdminRoleAsync(_roleName);
+            await AddAdminUserAsync(userEmail, password, _roleName);
+
+           
+        }
+
+        private async Task AddAdminRoleAsync(string roleName)
+        {
+
             if (!await _roleManager.RoleExistsAsync(roleName))
             {
                 var role = new Role()
                 { Name = roleName };
                 await _roleManager.CreateAsync(role);
             }
+        }
 
-            string userEmail = "admin@freecms.com";
-            string password = "Fr33cm5!!";
-            var user = await _userManager.FindByEmailAsync(userEmail);
+        private async Task AddAdminUserAsync(string email, string pass, string role)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
                 user = new ApplicationUser()
                 {
-                    UserName = userEmail,
-                    Email = userEmail,
-                    EmailConfirmed= true,
-                    LastName = roleName
+                    UserName = email,
+                    Email = email,
+                    EmailConfirmed = true,
+                    LastName = role
                 };
-                var result = _userManager.CreateAsync(user, password).Result;
-                
+                var result = _userManager.CreateAsync(user, pass).Result;
+
             }
             if (user != null)
             {
-                if (!_userManager.IsInRoleAsync(user, roleName).Result)
+                if (!_userManager.IsInRoleAsync(user, role).Result)
                 {
-                    await _userManager.AddToRoleAsync(user, roleName);
+                    await _userManager.AddToRoleAsync(user, role);
                 }
             }
         }
+
+        
+        
     }
 }
+

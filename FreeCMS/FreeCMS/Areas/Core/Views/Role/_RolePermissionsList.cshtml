@@ -1,0 +1,36 @@
+@model FreeCMS.Areas.Core.ViewModels.RoleDetailsVm
+@if(Model.RolePermissions != null && Model.RolePermissions.Count > 0)
+{
+    <div class="table-responsive scroll-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rolePermission in Model.RolePermissions)
+                {
+                    <tr>
+                        <td>@rolePermission.Permission.FullDisplayName</td>
+                    </tr>
+                    
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    @if(Model.IsAdmin)
+    {
+        <h4><font color="#ccc">این نقش به همه مجوزها دسترسی دارد.</font></h4>
+        <br />
+    }
+    else
+    {
+        <h4><font color="#ccc">هیچ مجوزی برای این نقش تعریف نشده است.</font></h4>
+        <br />
+    }
+    
+}

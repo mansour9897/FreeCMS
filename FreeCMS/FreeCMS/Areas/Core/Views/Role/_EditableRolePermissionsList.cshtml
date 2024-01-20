@@ -1,0 +1,98 @@
+@model FreeCMS.Areas.Core.ViewModels.EditRoleVm
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Unbind the original image 'href' set by the controller...
+        $('.deletePermission').attr('href', 'javascript://');
+        $('#deletePermissionModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            var fullname = button.attr("permissionname");
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            
+            var modal = $(this)
+            modal.find('#btn-permission-delete').attr('data-permissionid', recipient);
+            modal.find('#permission-info').html(fullname);
+        });
+        $("#deletePermissionModal").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+        $("#btn-permission-delete").click(function () {
+            var _permissionId = $(this).attr('data-permissionid');
+            var _id = '@Model.Id.ToString()';
+            var _parameters = { id: _id, permissionId: _permissionId };
+            $.ajax({
+                url: "/Core/Role/DeletePermissionFromRoleReturnPartialView",
+                type: "GET",
+                data: _parameters,
+                success: function (data, textStatus, jqXHR) {
+                    $('#PermissionsTable').html(data);
+                    $('#deletePermissionModal').modal('hide');
+                    $(".modal-backdrop").remove();
+                }
+            });
+            $('#deletePermissionModal').modal('hide');
+        });
+        
+    });
+</script>
+<div  id ="PermissionsTable" class="table-responsive scroll-wrapper">
+    @if(Model.RolePermissions != null && Model.RolePermissions.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rolePermission in Model.RolePermissions)
+                {
+                    <tr>
+                        <td>@rolePermission.Permission.FullDisplayName</td>
+                        <td>
+                            <center>
+                                <a href="#" class="deletePermission btn btn-default" id=@Model.Id permissionid=@rolePermission.Permission.Id permissionname="@rolePermission.Permission.FullDisplayName" data-whatever="@rolePermission.Permission.Id" data-toggle="modal" data-target="#deletePermissionModal">
+                                    حذف
+                                </a>
+                            </center>
+                        </td>
+                    </tr>
+                    
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        @if(Model.IsAdmin)
+        {
+            <h4><font color="#ccc">این نقش به همه مجوزها دسترسی دارد.</font></h4>
+            <br />
+        }
+        else
+        {
+            <h4><font color="#ccc">هیچ مجوزی برای این نقش تعریف نشده است.</font></h4>
+            <br />
+        }
+    }
+</div>
+<div class="modal fade" id="deletePermissionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">حذف مجوز</h4>
+            </div>
+            <div class="modal-body">
+                آیا از حذف این مجوز مطمئن هستید؟
+                <div id="permission-info"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-danger" id="btn-permission-delete" data-permissionid="">حذف</button>
+            </div>
+        </div>
+    </div>
+</div>

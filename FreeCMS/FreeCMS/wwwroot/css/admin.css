@@ -275,3 +275,7 @@ ul.sidebar-menu img.sidebar-menu-img {
     margin-left: auto !important;
 }
 
+.field-validation-error, .validation-summary-errors {
+    color: red;
+}
+

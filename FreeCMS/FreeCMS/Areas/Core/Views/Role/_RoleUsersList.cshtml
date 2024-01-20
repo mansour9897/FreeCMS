@@ -1,0 +1,29 @@
+@model FreeCMS.Areas.Core.ViewModels.RoleDetailsVm
+@if(Model.UserRoles != null && Model.UserRoles.Count > 0)
+{
+    <div class="table-responsive scroll-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>نام</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var userRole in Model.UserRoles)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details","User",new{area="Core",id=userRole.User.Id})" class="webo-username-link">@userRole.User.FullName</a>
+                        </td>
+                    </tr>
+                    
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <h4><font color="#ccc">هیچ کاربری این نقش را ندارد.</font></h4>
+    <br />
+}

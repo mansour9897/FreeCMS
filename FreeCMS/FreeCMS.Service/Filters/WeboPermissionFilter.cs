@@ -9,10 +9,10 @@ using System.Security.Principal;
 
 namespace FreeCMS.Service.Filters
 {
-	public class WeboPermissionFilter : Attribute, IAsyncAuthorizationFilter
+	public class FreeCmsPermissionFilter : Attribute, IAsyncAuthorizationFilter
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
-		public WeboPermissionFilter(UserManager<ApplicationUser> userManager)
+		public FreeCmsPermissionFilter(UserManager<ApplicationUser> userManager)
 		{
 			_userManager = userManager;
 		}
@@ -47,8 +47,15 @@ namespace FreeCMS.Service.Filters
 		{
 			if (principal != null && principal.Identity != null)
 			{
+				string userId = "";
 				var ci = principal.Identity as ClaimsIdentity;
-				string userId = ci != null ? ci.FindFirst(ClaimTypes.NameIdentifier).Value : null;
+				try
+				{
+					userId = ci != null ? ci.FindFirst(ClaimTypes.NameIdentifier).Value : null;
+
+				}
+				catch { }
+				finally { }
 				//int result = 0;
 				//if (int.TryParse(userId, out result))
 				//{
