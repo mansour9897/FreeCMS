@@ -1,0 +1,65 @@
+@model IPagedList<FreeCMS.DomainModels.System.Menu>
+@using X.PagedList.Mvc.Core; 
+@using X.PagedList;
+@using FreeCMS.Extensions
+@{
+    ViewData["Title"] = "مدیریت منوها";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+                <div class="box-tools pull-left">
+                    
+                </div>
+            </div>
+            <div class="box-body">
+                @if(Model != null && Model.Count > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>نام</th>
+                                <th>توضیحات</th>
+                                <th>فعالیت ها</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var menu in Model)
+                            {
+                                <tr>
+                                    
+                                    <td>@menu.DisplayText</td>
+                                    <td>@menu.Description.Truncate(50)</td>
+                                    <td>
+                                        @Html.ActionLink("ویرایش", "Edit", new { area="Core", id = menu.Id }, new { @class = "btn btn-default" }) 
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h4 class="text-center">هیچ شبکه منویی ثبت نشده است. </h4>
+                }
+            </div>
+            <div class="box-footer text-center">
+                @*Html.PagedListPager(Model,page => Url.Action("Index",new { page}))*@
+                @Html.PagedListPager(Model,page => Url.Action() + "?page=" + page)
+            </div>
+        </div>
+    </div>
+</div>

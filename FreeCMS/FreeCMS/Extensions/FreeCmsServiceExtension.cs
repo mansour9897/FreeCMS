@@ -38,6 +38,14 @@ namespace FreeCMS.Extensions
             services.AddScoped<ISocialNetworkService, SocialNetworkService>();
             services.AddScoped<IViewObjectRepository, ViewObjectRepository>();
             services.AddScoped<IViewObjectService, ViewObjectService>();
+            services.AddScoped<IMenuItemRepository, MenuItemRepository>();
+            services.AddScoped<IMenuItemService, MenuItemService>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
+            services.AddScoped<ISelectListService, SelectListService>();
+            services.AddScoped<ISettingService, SettingService>();
+            services.AddScoped<ISettingRepository, SettingRepository>();
 
         }
     }

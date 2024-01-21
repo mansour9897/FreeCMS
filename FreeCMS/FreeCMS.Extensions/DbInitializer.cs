@@ -1,10 +1,7 @@
 ﻿using FreeCMS.DomainModels.Identity;
-using FreeCMS.Extensions.Attributes;
-using FreeCMS.Extensions.Models;
-using FreeCMS.Service.System;
+using FreeCMS.DomainModels.System;
+using FreeCMS.Service.System.Abstraction;
 using Microsoft.AspNetCore.Identity;
-using System.Reflection;
-using System.Web.Mvc;
 
 namespace FreeCMS.Extensions
 {
@@ -12,11 +9,12 @@ namespace FreeCMS.Extensions
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<Role> _roleManager;
-
-        public DbInitializer(UserManager<ApplicationUser> userManager, RoleManager<Role> roleManager)
+        private readonly IMenuService _menuService;
+        public DbInitializer(UserManager<ApplicationUser> userManager, RoleManager<Role> roleManager, IMenuService menuService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _menuService = menuService;
         }
 
         public async void InitializeAsync()
@@ -28,7 +26,21 @@ namespace FreeCMS.Extensions
             await AddAdminRoleAsync(_roleName);
             await AddAdminUserAsync(userEmail, password, _roleName);
 
-           
+            if (_menuService.MenuTypeExist(MainMenuNames.PublicMainMenu) == false)
+            {
+                Menu menu = new Menu()
+                {
+                    Name = MainMenuNames.PublicMainMenu,
+                    IsPrivate = false,
+                    CssClass = "webo-public-main-menu",
+                    DisplayText = "منو اصلی سایت",
+                    Direction = MenuDirection.Horizontal,
+                    Description = "منوی اصلی بالای وبسایت"
+                };
+                _menuService.Add(menu);
+            }
+
+
         }
 
         private async Task AddAdminRoleAsync(string roleName)
@@ -66,8 +78,8 @@ namespace FreeCMS.Extensions
             }
         }
 
-        
-        
+
+
     }
 }
 

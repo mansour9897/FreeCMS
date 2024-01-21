@@ -3,6 +3,7 @@ using System;
 using FreeCMS.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeCMS.DAL.Migrations
 {
     [DbContext(typeof(FreeCMSContext))]
-    partial class FreeCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20240121055059_menu")]
+    partial class menu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -633,6 +636,10 @@ namespace FreeCMS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PluginName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Menu");
@@ -701,32 +708,6 @@ namespace FreeCMS.DAL.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("MenuItem");
-                });
-
-            modelBuilder.Entity("FreeCMS.DomainModels.System.Setting", b =>
-                {
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AssemblyName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Name");
-
-                    b.ToTable("Setting");
                 });
 
             modelBuilder.Entity("FreeCMS.DomainModels.System.SocialNetwork", b =>

@@ -25,6 +25,9 @@ namespace FreeCMS.DAL
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<SocialNetwork> SocialNetworks { get; set; }
 		public DbSet<ViewObject> ViewObjects { get; set; }
+		public DbSet<Menu> Menu { get; set; }
+		public DbSet<Setting> Setting { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);

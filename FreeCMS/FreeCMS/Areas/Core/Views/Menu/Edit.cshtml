@@ -1,0 +1,74 @@
+@model FreeCMS.DomainModels.System.Menu
+@{
+    ViewData["Title"] = "مدیریت منو";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+    TempData["ItemIndex"] = 0;
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Menu", new { area="Core"})">مدیریت منوها</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <h4>گزینه های منو</h4>
+        <div class="panel-group" id="menu-item-select-list" role="tablist" aria-multiselectable="true">
+            @await Component.InvokeAsync("CoreCustomLinkSelectList")
+            @await Component.InvokeAsync("ShowSelectLists")
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <form method="POST" id="menuEditorForm">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DisplayText)
+            <h4>ساختار منو</h4>
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h4 class="panel-title pull-right" style="padding-top: 5px;"> 
+                        @Model.DisplayText
+                    </h4>
+                    <div class="pull-left">
+                        @Html.ActionLink("انصراف", "Index", "Menu", new { area = "Core" }, new { @class = "btn btn-default"}) |
+                        <button type="button"  class="btn btn-success btnSaveEditedMenu">ذخیره</button> 
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <ol class="sortable ui-sortable mjs-nestedSortable-branch mjs-nestedSortable-expanded">
+                        @if(Model != null && Model.MenuItems != null && Model.MenuItems.Count > 0)
+                        {
+                            @foreach (var item in Model.MenuItems.Where(i => i.ParentId == null)
+                                .OrderBy(i => i.CreationDate))
+                            {
+                                @Html.Partial("_ShowEditableItem",item)
+                            }
+                        }
+                    </ol>
+                    <hr>
+                    <div class="form-group">
+                        <label asp-for="CssClass">کلاس CSS</label>
+                        <input asp-for="CssClass" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description">توضیحات</label>
+                        <input asp-for="Description" class="form-control">
+                    </div>
+                </div>
+                <div class="panel-footer clearfix">
+                    <div class="pull-left">
+                        @Html.ActionLink("انصراف", "Index", "Menu", new { area = "Core" }, new { @class = "btn btn-default"}) |
+                        <button type="button"  class="btn btn-success btnSaveEditedMenu">ذخیره</button> 
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
