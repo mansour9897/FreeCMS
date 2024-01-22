@@ -58,6 +58,7 @@ IDbInitializer dbInitializer = sc.ServiceProvider.GetRequiredService<IDbInitiali
 dbInitializer.InitializeAsync();
 FreeCmsBootstrapper.AddPermissions(sc.ServiceProvider.GetRequiredService<IPermissionService>());
 FreeCmsBootstrapper.AddSelectLists(sc.ServiceProvider.GetRequiredService<ISelectListService>());
+FreeCmsBootstrapper.AddSiteSettings(sc.ServiceProvider.GetRequiredService<ISettingService>());
 app.Run();
 
 

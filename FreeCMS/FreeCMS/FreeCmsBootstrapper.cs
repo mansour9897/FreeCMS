@@ -1,8 +1,10 @@
 ﻿using FreeCMS.Attributes;
 using FreeCMS.DomainModels.Identity;
+using FreeCMS.DomainModels.System;
 using FreeCMS.Extensions.Attributes;
 using FreeCMS.Extensions.Models;
 using FreeCMS.Service.System.Abstraction;
+using FreeCMS.Service.System.Implemented;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 
@@ -100,5 +102,83 @@ namespace FreeCMS
 			}
 
 		}
-	}
+
+		public static void AddSiteSettings(ISettingService settingService)
+		{
+			foreach (var setting in Settings)
+			{
+                if (!settingService.SettingExist(setting.Name, setting.Type))
+				{
+                    settingService.AddSetting(setting);
+                }
+            }
+		}
+
+        private static List<Setting> Settings
+        {
+            get
+            {
+                List<DomainModels.System.Setting> settings = new List<Setting>();
+                string settingsType = "SiteSettings";
+                string commentSettings = "CommentSettings";
+                settings.Add(new Setting
+                {
+                    Type = settingsType,
+                    Name = "SiteName",
+                    Value = "ترنج :)",
+                });
+                settings.Add(new Setting
+                {
+                    Type = settingsType,
+                    Name = "SiteEmail",
+                    Value = "",
+                });
+                settings.Add(new Setting
+                {
+                    Type = settingsType,
+                    Name = "SiteTelephone",
+                    Value = "",
+                });
+                settings.Add(new Setting
+                {
+                    Type = settingsType,
+                    Name = "SiteAddress",
+                    Value = "",
+                });
+                settings.Add(new Setting
+                {
+                    Type = settingsType,
+                    Name = "SiteLogo",
+                    Value = "/images/weboicon.jpg",
+                });
+                settings.Add(new Setting
+                {
+                    Type = settingsType,
+                    Name = "SiteSlogan",
+                    Value = "",
+                });
+                settings.Add(new Setting
+                {
+                    Type = settingsType,
+                    Name = "SiteFax",
+                    Value = "",
+                });
+                settings.Add(new Setting
+                {
+                    Type = settingsType,
+                    Name = "SiteAboutUs",
+                    Value = "",
+                });
+                //comments settings
+                settings.Add(new Setting
+                {
+                    Type = commentSettings,
+                    Name = "AutoVerify",
+                    Value = "False"
+                });
+                
+                return settings;
+            }
+        }
+    }
 }

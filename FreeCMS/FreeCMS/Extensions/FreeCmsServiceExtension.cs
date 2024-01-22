@@ -46,6 +46,8 @@ namespace FreeCMS.Extensions
             services.AddScoped<ISelectListService, SelectListService>();
             services.AddScoped<ISettingService, SettingService>();
             services.AddScoped<ISettingRepository, SettingRepository>();
+            services.AddScoped<ISiteSettingService, SiteSettingService>();
+            services.AddScoped<IVirtualFileManager,VirtualFileManager>();
 
         }
     }
