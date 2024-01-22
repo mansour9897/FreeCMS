@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "آمار بازدید";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="colxs-12 col-sm-12 col-md-12 col-lg-12">
+        @await Component.InvokeAsync("AnalyticStatistics")
+    </div>
+    <div class="colxs-12 col-sm-12 col-md-6 col-lg-6">
+        @await Component.InvokeAsync("AnalyticViewBrowsers")
+    </div>
+    <div class="colxs-12 col-sm-12 col-md-6 col-lg-6">
+        @await Component.InvokeAsync("AnalyticViewOs")
+    </div>
+    <div class="colxs-12 col-sm-12 col-md-6 col-lg-6">
+        @await Component.InvokeAsync("AnalyticSummary")
+    </div> 
+    <div class="colxs-12 col-sm-12 col-md-6 col-lg-6">
+        @await Component.InvokeAsync("AnalyticTopPages")
+    </div>
+    <div class="colxs-12 col-sm-12 col-md-12 col-lg-12">
+        @await Component.InvokeAsync("AnalyticTopReferrers")
+    </div> 
+</div>

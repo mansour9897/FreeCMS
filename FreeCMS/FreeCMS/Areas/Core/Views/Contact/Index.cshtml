@@ -1,0 +1,70 @@
+@model IPagedList<FreeCMS.DomainModels.System.ContactMessage>
+@using FreeCMS.Extensions;
+@using X.PagedList.Mvc.Core; 
+@using X.PagedList;
+@{
+    ViewData["Title"] = "مدیریت پیام ها";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+                <div class="box-tools pull-left">
+                    
+                </div>
+            </div>
+            <div class="box-body">
+                @if(Model != null && Model.Count > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>نام</th>
+                                <th>ایمیل</th>
+                                <th>تاریخ ارسال</th>
+                                <th>پیام</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var message in Model)
+                            {
+                                <tr>
+                                    <td>@message.Name</td>
+                                    <td>@message.Email</td>
+                                    <td>@message.CreateDate</td>
+                                    <td>@message.Content.Truncate(50)</td>
+                                    <td>
+                                        @Html.ActionLink("جزییات", "Details", new { area="Core", id = message.Id }, new { @class = "btn btn-default" }) |
+                                        @Html.ActionLink("حذف", "Delete", new { area="Core",id = message.Id }, new { @class = "btn btn-danger" }) 
+                                    </td>
+                                </tr>
+                                
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h4 class="text-center">هیچ کی ما را دوست نداره! یه دونه پیام هم نفرستادن!</h4>
+                }
+            </div>
+            <div class="box-footer text-center">
+                @*Html.PagedListPager(Model,page => Url.Action("Index",new { page}))*@
+                @Html.PagedListPager(Model,page => Url.Action() + "?page=" + page)
+            </div>
+        </div>
+    </div>
+</div>

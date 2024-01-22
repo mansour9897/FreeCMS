@@ -1,0 +1,44 @@
+<style>
+    .caret-up{
+        border-top: none;
+        border-bottom: 4px dashed;
+    }
+</style>
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+            <span>پیوند دلخواه</span>
+            <a class="pull-left collapsed" role="button" data-toggle="collapse" data-parent="#menu-item-select-list" href="#customLinkItem" aria-expanded="false" aria-controls="collapseOne1">
+                <span class="caret"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="customLinkItem" class="panel-collapse menu-item-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body" id="core-custom-link-item">
+            <input id="custom-link-checkbox" type="checkbox" class="webo-menu-item-checkbox disable-unchecked hidden" data-text="" data-link="" data-header="پیوند دلخواه" data-link-is-enabled="true" checked>
+            <div class="form-group">
+                <label>متن</label>
+                <input id="custom-link-text" class="form-control webo-menu-item-input">
+            </div>
+            <div class="form-group">
+                <label>نشانی اینترنتی</label>
+                <input id="custom-link-href" class="form-control webo-menu-item-input">
+            </div>
+        </div>
+        <div class="panel-footer text-left">
+            <button type="button" class="btn-add-menu-item btn btn-info" data-items-wrapper-id="#core-custom-link-item" >افزودن</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#custom-link-text').on('input propertychange paste',function(){
+            var text = $(this).val();
+            $('#custom-link-checkbox').data('text',text);
+        });
+        $('#custom-link-href').on('input propertychange paste',function(){
+            var text = $(this).val();
+            $('#custom-link-checkbox').data('link',text);
+        });
+    });
+</script>

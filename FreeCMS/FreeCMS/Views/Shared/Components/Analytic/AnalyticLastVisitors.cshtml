@@ -1,0 +1,35 @@
+@model IEnumerable<string>
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">@ViewBag.LastVisitorsCount بازدیدکننده اخیر</h3>
+    </div><!-- ./box-header -->
+    <div class="box-body">
+        @if(Model != null && Model.Count() > 0)
+        {
+            <div class="responsive-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>آیپی</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ip in Model)
+                        {
+                            <tr>
+                                <td>@ip</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div><!-- ./responsive-table -->
+        }
+        else
+        {
+            <div class="tex-center">
+                <h4>بازدیدکننده ای وجود ندارد.</h4>
+            </div>
+        }
+        
+    </div><!-- ./box-bosy -->
+</div><!-- ./box -->

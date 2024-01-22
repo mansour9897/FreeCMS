@@ -1,0 +1,81 @@
+@model IPagedList<FreeCMS.DomainModels.System.Comment>
+@using FreeCMS.Extensions;
+@using X.PagedList.Mvc.Core; 
+@using X.PagedList;
+@{
+    ViewData["Title"] = "مدیریت دیدگاه ها";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area="Core"})">پیشخوان مدیریت</a>
+        </li>
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewData["Title"]</h3>
+                <div class="box-tools pull-left">
+                    
+                </div>
+            </div>
+            <div class="box-body">
+                @if(Model != null && Model.Count > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>نام</th>
+                                <th>تاریخ ارسال</th>
+                                <th>تایید شده</th>
+                                <th>پیام</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var comment in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @*@if(comment.Type == Webo.DomainClass.Models.CommentType.Guest)
+                                        {
+                                            <img src="@userImageService.GetUserImage(0)" class="webo-user-image-table" >
+                                        }
+                                        else
+                                        {
+                                            <img src="@userImageService.GetUserImage((int)comment.UserId)" class="webo-user-image-table" >
+                                        }*@
+                                    </td>
+                                    <td>@comment.SenderName.Truncate(25)</td>
+                                    <td>@comment.CreateDate</td>
+                                    <td>@comment.IsVerified.ToPersianString()</td>
+                                    <td>@comment.Text.Truncate(50)</td>
+                                    <td>
+                                        @Html.ActionLink("جزییات", "Details", new { area="Core", id = comment.Id }, new { @class = "btn btn-default" }) |
+                                        @Html.ActionLink("حذف", "Delete", new { area="Core",id = comment.Id }, new { @class = "btn btn-danger" }) 
+                                    </td>
+                                </tr>
+                                
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h4 class="text-center">دیدگاهی ثبت نشده! زیاد سخت نگیر! :)</h4>
+                }
+            </div>
+            <div class="box-footer text-center">
+                @*Html.PagedListPager(Model,page => Url.Action("Index",new { page}))*@
+                @Html.PagedListPager(Model,page => Url.Action() + "?page=" + page)
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+@model List<string>
+@if(Model != null && Model.Count > 0)
+{
+    foreach (var selectList in Model)
+    {
+        @await Component.InvokeAsync(selectList);
+    }
+}

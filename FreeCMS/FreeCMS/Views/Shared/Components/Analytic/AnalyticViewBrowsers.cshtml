@@ -1,0 +1,67 @@
+@model FreeCMS.Areas.Core.ViewModels.Analytic.ChartModel
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">مرورگرها</h3>
+    </div><!-- ./box-header -->
+    <div class="box-body">
+        @if(Model != null )
+        {
+            <div>
+                <canvas id="browsers-chart"></canvas>
+            </div>            
+        }
+        else
+        {
+            <div class="tex-center">
+                <h4>داده ای وجود ندارد.</h4>
+            </div>
+        }
+        
+    </div><!-- ./box-bosy -->
+</div><!-- ./box -->
+<script>
+    Chart.defaults.global.defaultFontFamily = "BKoodak";
+    chartColors = ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)','rgb(75, 192, 192)','rgb(54, 162, 235)','rgb(153, 102, 255)','rgb(201, 203, 207)','rgb(255, 99, 132)','rgb(255, 159, 64)'];
+    var browsersCtx = document.getElementById('browsers-chart').getContext('2d');
+    var browsersChart = new Chart(browsersCtx,{
+        type: 'pie',
+			data: {
+				datasets: [{
+					data:@Html.Raw(Model.Data),
+					label: "@Html.Raw(Model.Label)",
+                    backgroundColor: chartColors
+				}],
+				labels: @Html.Raw(Model.Labels),
+			},
+            plugins: [ChartDataLabels],
+			options: {
+				responsive: true,
+                tooltips: {
+                    enabled: false,
+                },
+                tooltips:{
+                    callbacks:{
+                        label:function(tooltipItem,data){
+                            //get the concerned dataset
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            //calculate the total of this data set
+                            var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+                                return previousValue + currentValue;
+                            });
+                            //get the current items value
+                            var currentValue = dataset.data[tooltipItem.index];
+                            //calculate the precentage based on the total and current item, also this does a rough rounding to give a whole number
+                            var percentage = Math.floor(((currentValue/total) * 100)+0.5);
+
+                            return percentage + "%";
+                        }
+                    }
+                },
+                plugins: {
+                    datalabels: {
+                        display:false
+                    }
+                }
+			}
+    });
+</script>

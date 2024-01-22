@@ -1,0 +1,67 @@
+﻿@model FreeCMS.DomainModels.System.Menu
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+
+<h4>Menu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="View">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreationDate" class="control-label"></label>
+                <input asp-for="CreationDate" class="form-control" />
+                <span asp-validation-for="CreationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsPrivate" /> @Html.DisplayNameFor(model => model.IsPrivate)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CssClass" class="control-label"></label>
+                <input asp-for="CssClass" class="form-control" />
+                <span asp-validation-for="CssClass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayText" class="control-label"></label>
+                <input asp-for="DisplayText" class="form-control" />
+                <span asp-validation-for="DisplayText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direction" class="control-label"></label>
+                <input asp-for="Direction" class="form-control" />
+                <span asp-validation-for="Direction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

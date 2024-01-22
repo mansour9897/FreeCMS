@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "تنطمیات سایت";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Settings", "Site", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-info"></span>
+                <br>
+                <small>اطلاعات سایت</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Logo", "Site", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-image"></span>
+                <br>
+                <small>لوگو سایت</small>
+            </h1>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 webo-mb-5">
+        <a href="@Url.Action("Comments", "Site", new { area="Core"})" class="text-center btn btn-default btn-block">
+            <h1>
+                <span class="fas fa-comments"></span>
+                <br>
+                <small>تنطمیات دیدگاه ها</small>
+            </h1>
+        </a>
+    </div>
+</div>

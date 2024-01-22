@@ -1,0 +1,59 @@
+@model List<FreeCMS.DomainModels.Cms.Page>
+<style>
+    .caret-up{
+        border-top: none;
+        border-bottom: 4px dashed;
+    }
+</style>
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+            <span>برگه ها</span>
+            <a class="pull-left collapsed" role="button" data-toggle="collapse" data-parent="#menu-item-select-list" href="#cms-pages-select-list" aria-expanded="false" aria-controls="collapseOne1">
+                <span class="caret"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="cms-pages-select-list" class="panel-collapse menu-item-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body webo-select-list-box" id="cms-pages-select-list-wrapper">
+            @if(Model != null && Model.Count > 0)
+            {
+                <div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#cms-last-pages" aria-controls="cms-last-pages" role="tab" data-toggle="tab">تازه ترین ها</a></li>
+                        <li role="presentation"><a href="#cms-all-pages" aria-controls="cms-all-pages" role="tab" data-toggle="tab">همه</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="cms-last-pages">
+                            @foreach (var pageItem in Model.Take(5))
+                            {
+                                <div>
+                                    <input id="@pageItem.Id" type="checkbox" class="webo-menu-item-checkbox " data-text="@pageItem.Title" data-link="@Url.Action("Page","Home",new{area="CMS",id=pageItem.Id})" data-header="برگه" data-link-is-enabled="false" >        
+                                    <label>@pageItem.Title</label>
+                                </div>
+                            }
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="cms-all-pages">
+                            @foreach (var pageItem in Model)
+                            {
+                                <div>
+                                    <input id="@pageItem.Id" type="checkbox" class="webo-menu-item-checkbox " data-text="@pageItem.Title" data-link="@Url.Action("Page","Home",new{area="CMS",id=pageItem.Id})" data-header="برگه" data-link-is-enabled="false" >             
+                                    <label>@pageItem.Title</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }else
+            {
+                <h4>برگه ای وجود ندارد.</h4>
+            }
+        </div>
+        <div class="panel-footer text-left">
+            <button type="button" class="btn-add-menu-item btn btn-info" data-items-wrapper-id="#cms-pages-select-list" >افزودن</button>
+        </div>
+    </div>
+</div>

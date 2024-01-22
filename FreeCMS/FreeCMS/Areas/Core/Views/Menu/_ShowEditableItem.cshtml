@@ -1,0 +1,75 @@
+@model FreeCMS.DomainModels.System.MenuItem
+@{
+    int index = (int)TempData["ItemIndex"];
+    TempData["ItemIndex"] = index + 1;
+    string strIndex = index.ToString();
+    string itemId = "menuItem_" + strIndex;
+    string collapseId = "ItemCollapse-" + strIndex;
+    string collapseHref = "#" + collapseId;
+    string itemText = "Text[" + strIndex + "]";
+    string itemHref = "Links[" + strIndex +"]";
+    string itemLinkIsEnabled = "LinkIsEnabled[" + strIndex + "]";
+    string itemCssClass = "CssClasses[" + strIndex + "]";
+    string itemNewTab = "OpenInNewTab[" + strIndex + "]";
+}
+<li class="webo-menu-item mjs-nestedSortable-leaf mjs-nestedSortable-branch mjs-nestedSortable-expanded" id="@itemId">
+    <div class="menuDiv panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <span class="menu-item-display-name">@Model.Text</span>
+                <a class="pull-left collapsed" role="button" data-toggle="collapse" href="@collapseHref" aria-expanded="false" aria-controls="ItemCollapse-3">
+                    <span class="caret"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="@collapseId" class="panel-collapse menu-item-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>متن</label>
+                    <input name="@itemText" class="menu-item-name form-control" value="@Model.Text">
+                </div>
+                <div class="form-group">
+                    <label>نشانی اینترنتی</label>
+                    @if(Model.LinkIsEditable)
+                    {
+                        <input name="@itemHref" class="menu-item-link form-control" value="@Model.Url">
+                    }
+                    else
+                    {
+                        <input name="@itemHref" class="menu-item-link form-control" value="@Model.Url" readonly>
+                    }
+                    
+                    <input name="@itemLinkIsEnabled" type="hidden" value="@Model.LinkIsEditable.ToString()" class="menu-item-link-status form-control">
+                </div>
+                <div class="form-group">
+                    <label>کلاس CSS</label>
+                    <input name="@itemCssClass" class="menu-item-css form-control" value="@Model.CssClass">
+                </div>
+                <div class="form-group">
+                    @if(Model.OpenInNewWindow)
+                    {
+                        <input name="@itemNewTab" type="checkbox" class="menu-item-tab" value="true" checked>
+                    }
+                    else
+                    {
+                        <input name="@itemNewTab" type="checkbox" class="menu-item-tab" value="true">
+                    }
+                    <input name="@itemNewTab" type="hidden" value="false" class="menu-item-tab">
+                    <label>باز شدن در تب جدید</label>
+                </div>
+            </div>
+            <div class="panel-footer text-left">
+                <button type="button" class="btn-remove-menu-item btn btn-danger" >حذف</button>
+            </div>
+        </div>
+    </div>
+    @if(Model.Children != null && Model.Children.Count > 0)
+    {
+        <ol>
+            @foreach(var child in Model.Children.OrderBy(i => i.CreationDate))
+            {
+                @Html.Partial("_ShowEditableItem",child)
+            }
+        </ol>   
+    }
+</li>

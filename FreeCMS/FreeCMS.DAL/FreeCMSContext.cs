@@ -1,5 +1,6 @@
 ﻿using FreeCMS.DomainModels.Cms;
 using FreeCMS.DomainModels.Identity;
+using FreeCMS.DomainModels.System;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
@@ -20,6 +21,14 @@ namespace FreeCMS.DAL
 		public DbSet<Topic> Topics { get; set; }
 		public DbSet<PostTopic> PostTopics { get; set; }
 		public DbSet<Slide> Slides { get; set; }
+		public DbSet<ContactMessage> ContactMessages { get; set; }
+		public DbSet<Comment> Comments { get; set; }
+		public DbSet<SocialNetwork> SocialNetworks { get; set; }
+		public DbSet<ViewObject> ViewObjects { get; set; }
+		public DbSet<Menu> Menu { get; set; }
+		public DbSet<Setting> Setting { get; set; }
+		
+
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
