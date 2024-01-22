@@ -9,7 +9,7 @@ namespace FreeCMS.Service.System.Abstraction
         MenuItem Add(MenuItem item);
         bool ItemExist(string name, string menu);
         void Remove(string name, string menu);
-        void RemoveByAssemblyName(string assemblyName);
+        //void RemoveByAssemblyName(string assemblyName);
         void RemoveByMenuId(int id);
     }
 

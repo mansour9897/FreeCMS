@@ -3,6 +3,7 @@ using System;
 using FreeCMS.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeCMS.DAL.Migrations
 {
     [DbContext(typeof(FreeCMSContext))]
-    partial class FreeCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20240122053338_setting-correction")]
+    partial class settingcorrection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -648,18 +651,22 @@ namespace FreeCMS.DAL.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CssClass")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LinkIsEditable")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Logo")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ManagePermission")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("MenuId")
@@ -673,6 +680,10 @@ namespace FreeCMS.DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid?>("ParentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PluginName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ShowPriority")

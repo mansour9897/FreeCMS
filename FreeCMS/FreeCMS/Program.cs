@@ -57,6 +57,7 @@ var sc = app.Services.CreateScope();
 IDbInitializer dbInitializer = sc.ServiceProvider.GetRequiredService<IDbInitializer>();
 dbInitializer.InitializeAsync();
 FreeCmsBootstrapper.AddPermissions(sc.ServiceProvider.GetRequiredService<IPermissionService>());
+FreeCmsBootstrapper.AddSelectLists(sc.ServiceProvider.GetRequiredService<ISelectListService>());
 app.Run();
 
 

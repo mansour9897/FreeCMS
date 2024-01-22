@@ -66,14 +66,14 @@ namespace FreeCMS.Service.System.Implemented
                     _menuItemRepo.Delete(item);
             }
         }
-        public void RemoveByAssemblyName(string assemblyName)
-        {
-            var items = _menuItemRepo.List(i => i.PluginName == assemblyName);
-            foreach (var item in items)
-            {
-                _menuItemRepo.Delete(item);
-            }
-        }
+        //public void RemoveByAssemblyName(string assemblyName)
+        //{
+        //    var items = _menuItemRepo.List(i => i.PluginName == assemblyName);
+        //    foreach (var item in items)
+        //    {
+        //        _menuItemRepo.Delete(item);
+        //    }
+        //}
         public void RemoveByMenuId(int id)
         {
             var items = _menuItemRepo.List(i => i.MenuId == id);

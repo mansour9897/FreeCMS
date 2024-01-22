@@ -10,7 +10,7 @@ namespace FreeCMS.Service.System.Abstraction
         Setting UpdateSetting(Setting setting);
         Setting GetByName(string name,string type);
         void RemoveSetting(Setting setting);
-        void RemoveByAssemblyName(string assemblyName);
+        //void RemoveByAssemblyName(string assemblyName);
         void RemoveByType(string type);
         bool SettingExist(string name,string type);
 

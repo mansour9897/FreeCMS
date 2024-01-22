@@ -42,15 +42,15 @@ namespace FreeCMS.Service.System.Implemented
         {
             _settingRepo.Delete(setting);
         }
-        public void RemoveByAssemblyName(string assemblyName)
-        {
-            var settings = _settingRepo.List(s => s.AssemblyName == assemblyName);
-            foreach (var item in settings)
-            {
-                _settingRepo.Delete(item);
+        //public void RemoveByAssemblyName(string assemblyName)
+        //{
+        //    var settings = _settingRepo.List(s => s.AssemblyName == assemblyName);
+        //    foreach (var item in settings)
+        //    {
+        //        _settingRepo.Delete(item);
                 
-            }
-        }
+        //    }
+        //}
         public void RemoveByType(string type)
         {
             var settings = GetByType(type);

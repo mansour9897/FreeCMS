@@ -27,6 +27,7 @@ namespace FreeCMS.DAL
 		public DbSet<ViewObject> ViewObjects { get; set; }
 		public DbSet<Menu> Menu { get; set; }
 		public DbSet<Setting> Setting { get; set; }
+		
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{

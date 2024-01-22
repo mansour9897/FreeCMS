@@ -33,14 +33,13 @@ namespace FreeCMS.DomainModels.System
         public string Name { get; set; }
         public string Text { get; set; }
         public DateTime CreationDate { get; set; }
-        public string Description { get; set; }
-        public string Logo { get; set; }
-        public string PluginName { get; set; }
+        public string? Description { get; set; }
+        public string? Logo { get; set; }
         public string Url { get; set; }
-        public string ManagePermission { get; set; }
+        public string? ManagePermission { get; set; }
         public int ShowPriority { get; set; }
         public bool OpenInNewWindow { get; set; }
-        public string CssClass { get; set; }
+        public string? CssClass { get; set; }
         public bool LinkIsEditable { get; set; }
         public int MenuId { get; set; }
         public Guid? ParentId { get; set; }

@@ -5,6 +5,7 @@ using FreeCMS.Service.System.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
+using Microsoft.EntityFrameworkCore;
 namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
@@ -38,9 +39,10 @@ namespace FreeCMS.Areas.Core.Controllers
         [ActionInfo("مدیریت منو","مدیریت منو")]
         public IActionResult Edit(int id)
         {
-            var menu = _menuService.GetMenuTypeById(id);
+            var menu =_menuService.GetMenuTypeById(id);
             if(menu == null)
                 return NotFound();
+            menu.MenuItems = _itemService.GetAllItems(menu.Name);
             return View(menu);
         }
         [HttpPost]
