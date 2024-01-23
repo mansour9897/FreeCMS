@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'iransansweb';
+    src: url('fonts/iransansweb.eot') format('embedded-opentype'), url('fonts/iransansweb.ttf') format('truetype'), url('fonts/iransansweb.woff') format('woff'), url('fonts/iransansweb.woff2') format('woff2');
+}
+
 html {
     font-size: 14px;
     position: relative;
@@ -5,6 +10,7 @@ html {
 }
 
 body {
+    font-family: 'iransansweb','IRANSansWeb(FaNum)','B Yekan';
     direction: rtl;
     margin-bottom: 60px;
 }
@@ -27,3 +33,5 @@ body {
     left: unset;
     right: 0;
 }
+
+
