@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FreeCMS.Areas.Cms.ViewModels.Item;
 using FreeCMS.DomainModels.Cms;
+using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.CMS.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
@@ -10,6 +12,8 @@ namespace FreeCMS.Areas.Cms.Controllers
 {
     [Area("CMS")]
     [Route("CMS/[controller]/[action]")]
+    [Authorize]
+    [ControllerInfo("مدیریت آیتم ها", "وبلاگ")]
     public class ItemController : Controller
 	{
 		#region  variables

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FreeCMS.Areas.Cms.ViewModels;
 using FreeCMS.DomainModels.Cms;
+using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.CMS.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
@@ -10,7 +12,9 @@ namespace FreeCMS.Areas.Cms.Controllers
 {
 	[Area("CMS")]
 	[Route("CMS/[controller]/[action]")]
-	public class GalleryController : Controller
+    [Authorize]
+    [ControllerInfo("مدیریت گالری ها", "وبلاگ")]
+    public class GalleryController : Controller
 	{
 		#region variables
 		private readonly string _areaName = "CMS";

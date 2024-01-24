@@ -3,6 +3,7 @@ using FreeCMS.Areas.Cms.ViewModels.Post;
 using FreeCMS.Areas.Cms.ViewModels.Topic;
 using FreeCMS.DomainModels.Cms;
 using FreeCMS.DomainModels.Identity;
+using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.CMS.Abstraction;
 using FreeCMS.Service.Filters;
 using Microsoft.AspNetCore.Authorization;
@@ -14,8 +15,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 {
     [Area("CMS")]
     [Route("CMS/[controller]/[action]")]
-    //[WeboAuthorize]
-    //[ControllerInfo("مدیریت نوشته ها")]
+    [ControllerInfo("مدیریت نوشته ها","وبلاگ")]
     [Authorize]
     public class PostController : Controller
     {

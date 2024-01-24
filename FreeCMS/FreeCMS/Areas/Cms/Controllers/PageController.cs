@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using FreeCMS.Areas.Cms.ViewModels.Page;
 using FreeCMS.DomainModels.Cms;
+using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.CMS.Abstraction;
 using FreeCMS.Service.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 
@@ -10,6 +12,8 @@ namespace FreeCMS.Areas.Cms.Controllers
 {
     [Area("CMS")]
     [Route("CMS/[controller]/[action]")]
+    [Authorize]
+    [ControllerInfo("مدیریت برگه ها", "وبلاگ")]
     public class PageController : Controller
 	{
 		#region variables
