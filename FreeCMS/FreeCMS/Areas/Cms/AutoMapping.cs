@@ -6,6 +6,7 @@ using FreeCMS.Areas.Cms.ViewModels;
 using FreeCMS.DomainModels.Cms;
 using AutoMapper;
 using FreeCMS.Areas.Cms.Utilities;
+using FreeCMS.Areas.Cms.ViewModels.Slide;
 
 namespace FreeCMS.Areas.Cms
 {
@@ -54,7 +55,11 @@ namespace FreeCMS.Areas.Cms
 			CreateMap<EditablePage, Page>()
 				.ForMember(dest => dest.MetaKeywords,
 				opt => opt.MapFrom(src => src.MetaKeywords.ToMetaKeywords()));
-		}
 
-	}
+            CreateMap<NewSlide, Slide>();
+            CreateMap<Slide, EditableSlide>().ReverseMap();
+
+        }
+
+    }
 }

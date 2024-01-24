@@ -1,0 +1,12 @@
+@model IList<FreeCMS.DomainModels.System.SocialNetwork>
+@if (Model != null && Model.Count > 0)
+{
+	<div class="social-networks-wrapper text-center">
+		@foreach (var socialNetwork in Model)
+		{
+			<a href="@socialNetwork.Address" target="_blank">
+				<img src="@socialNetwork.Image" alt="@socialNetwork.Name" class="img-fluid img-social-network-public">
+			</a>
+		}
+	</div>
+}

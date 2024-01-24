@@ -42,7 +42,8 @@ namespace FreeCMS.Service.System
         }
         public Menu GetMenuTypeByName(string name)
         {
-            return _menuRepo.List(mt => mt.Name == name).FirstOrDefault();
+            //return _menuRepo.List(mt => mt.Name == name).FirstOrDefault();
+            return _menuRepo.GetByName(name);
         }
         public bool MenuTypeExist(string name)
         {

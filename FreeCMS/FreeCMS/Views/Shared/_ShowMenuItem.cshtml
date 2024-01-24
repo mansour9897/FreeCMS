@@ -1,0 +1,45 @@
+@model FreeCMS.DomainModels.System.MenuItem
+@{
+    string menuId = Model.Id.ToString();
+    string hrefMenuId = "#" + menuId;
+    bool isSubMenu = false;
+    string itemClass = "nav-link text-dark " + Model.CssClass;
+    string menuClass = "nav-link dropdown-toggle " + Model.CssClass;
+    if(Model.Parent != null)
+        isSubMenu = true;
+    string dropdownCssClass = "nav-item dropdown";
+    if(isSubMenu)
+        dropdownCssClass = "nav-item dropdown dropdown-submenu";
+    
+}
+@if(Model.Children != null && Model.Children.Count > 0)
+{
+    <li class="@dropdownCssClass">
+        @if(isSubMenu)
+        {
+            <a href="#" class="@menuClass" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Model.Text</a>
+        }
+        else
+        {
+            <a href="#" class="@menuClass" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Model.Text <span class="caret"></span></a>
+        }
+        
+        <ul id="@menuId" class="dropdown-menu" >
+            @foreach(var child in Model.Children.OrderBy(i => i.CreationDate))
+            {
+                @Html.Partial("_ShowMenuItem",child)
+            }
+        </ul>
+    </li>
+}
+else
+{
+    @if(Model.OpenInNewWindow)
+    {
+        <li class="nav-item"><a href="@Model.Url" class="@itemClass" target="_blank">@Model.Text</a></li>
+    }
+    else
+    {
+        <li class="nav-item"><a href="@Model.Url" class="@itemClass" >@Model.Text</a></li>
+    }
+}

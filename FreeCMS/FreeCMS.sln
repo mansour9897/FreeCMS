@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCMS.Repository", "FreeC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCMS.Common", "FreeCMS.Common\FreeCMS.Common.csproj", "{2FBB1A09-637A-4C1F-A0EE-21740E2EA88C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCMS.Service", "FreeCMS.Service\FreeCMS.Service.csproj", "{A758DAAF-1936-4174-901C-28636CD00E25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCMS.Service", "FreeCMS.Service\FreeCMS.Service.csproj", "{A758DAAF-1936-4174-901C-28636CD00E25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

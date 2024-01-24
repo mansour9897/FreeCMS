@@ -1,0 +1,39 @@
+﻿@model IList<FreeCMS.DomainModels.Cms.Slide>
+
+@if (Model != null && Model.Count > 0)
+{
+	<div id="carouselExampleCaptions" class="carousel slide">
+		<div class="carousel-indicators">
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+			@for (int index = 1; index < Model.Count; index++)
+			{
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="@index" aria-label="Slide 2"></button>
+			}
+		</div>
+		<div class="carousel-inner">
+			<a class="carousel-item active" href="@Model[0].Link" target="_blank">
+				<img src="@Model[0].Image" class="d-block w-100" alt="@Model[0].Text">
+				<div class="carousel-caption d-none d-md-block">
+					<h5>@Model[0].Text</h5>
+				</div>
+			</a>
+			@for (int index = 1; index < Model.Count; index++)
+			{
+				<a class="carousel-item" href="@Model[index].Link" target="_blank">
+					<img src="@Model[index].Image" class="d-block w-100" alt="@Model[index].Text">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>@Model[index].Text</h5>
+					</div>
+				</a>
+			}
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
+}
