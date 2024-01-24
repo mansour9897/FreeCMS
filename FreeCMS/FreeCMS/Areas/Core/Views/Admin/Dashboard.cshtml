@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "پیشخوان اصلی ";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div>
+    <ol class="breadcrumb webo-breadcrumb" style="background-color:#fff;">
+        <li>
+            <span>@ViewData["Title"]</span>
+        </li>
+    </ol>
+</div>
+<div class=row>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="small-box bg-maroon">
+            <div class="inner">
+                <h3>@ViewBag.MessagesCount</h3>
+                <p>پیام</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-mail-bulk"></i>
+            </div>
+            <a href="@Url.Action("Index", "Contact", new { area="Core"})" class="small-box-footer">مشاهده همه</a>
+        </div>
+    </div><!-- ./messages count -->
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="small-box bg-purple">
+            <div class="inner">
+                <h3>@ViewBag.CommentsCount</h3>
+                <p>دیدگاه</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-comments"></i>
+            </div>
+            <a href="@Url.Action("Index", "Comment", new { area="Core"})" class="small-box-footer">مشاهده همه</a>
+        </div>
+    </div><!-- ./comments count -->
+    
+</div>

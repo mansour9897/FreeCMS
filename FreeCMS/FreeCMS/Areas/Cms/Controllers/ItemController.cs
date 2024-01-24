@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using FreeCMS.Areas.Cms.ViewModels.Item;
+using FreeCMS.Attributes;
 using FreeCMS.DomainModels.Cms;
+using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.CMS.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
@@ -10,6 +13,8 @@ namespace FreeCMS.Areas.Cms.Controllers
 {
     [Area("CMS")]
     [Route("CMS/[controller]/[action]")]
+    [FreeCmsAuthorize]
+    [ControllerInfo("مدیریت آیتم ها", "وبلاگ")]
     public class ItemController : Controller
 	{
 		#region  variables
@@ -32,7 +37,8 @@ namespace FreeCMS.Areas.Cms.Controllers
 		#endregion
 
 		#region actions
-		//[ActionInfo("مشاهده همه تصاویر", "فهرست تصاویر")]
+
+		[ActionInfo("مشاهده همه تصاویر", "فهرست تصاویر")]
 		public IActionResult Images(int? page)
 		{
 			GalleryType itemType = GalleryType.Image;
@@ -43,7 +49,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 			return View(items.ToPagedList(pageNumber, pageSize));
 		}
 
-		//[ActionInfo("مشاهده همه ویدئوها", "فهرست ویدئوها")]
+		[ActionInfo("مشاهده همه ویدئوها", "فهرست ویدئوها")]
 		public IActionResult Videos(int? page)
 		{
 			GalleryType itemType = GalleryType.Video;
@@ -54,7 +60,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 			return View(items.ToPagedList(pageNumber, pageSize));
 		}
 
-		//[ActionInfo("ایجاد آیتم جدید", "آیتم جدید")]
+		[ActionInfo("ایجاد آیتم جدید", "آیتم جدید")]
 		public IActionResult Create(GalleryType type)
 		{
 			ViewBag.Type = type;
@@ -77,7 +83,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 			return View(model);
 		}
 
-		//[ActionInfo("مشاهده جزییات یک آیتم", "جزییات آیتم")]
+		[ActionInfo("مشاهده جزییات یک آیتم", "جزییات آیتم")]
 		public IActionResult Details(int id)
 		{
 			GalleryItem item = _gitemService.FindById(id);
@@ -87,7 +93,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 			return View(item);
 		}
 
-		//[ActionInfo("ویرایش اطلاعات آیتم", "ویرایش آیتم")]
+		[ActionInfo("ویرایش اطلاعات آیتم", "ویرایش آیتم")]
 		public IActionResult Edit(int id)
 		{
 			GalleryItem item = _gitemService.FindById(id);
@@ -112,7 +118,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 			return View(model);
 		}
 
-		//[ActionInfo("حذف آیتم", "حذف آیتم")]
+		[ActionInfo("حذف آیتم", "حذف آیتم")]
 		public IActionResult Delete(int id)
 		{
 			GalleryItem item = _gitemService.FindById(id);

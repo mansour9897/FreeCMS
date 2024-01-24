@@ -1,13 +1,14 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using FreeCMS.Attributes;
+using FreeCMS.Extensions.Attributes;
 
 namespace API.NetCore.Controllers
 {
     [Area("Core")]
-    //[WeboAuthorize]
-    //[ControllerInfo("مدیریت فایل")]
-    //[Route("[controller]")]
+    [FreeCmsAuthorize]
+    [ControllerInfo("مدیریت فایل","سیستم")]
     [Route("RichFilemanager/connectors/asp/filemanager.asp")]
     public class FileManagerController : Controller
     {
@@ -27,7 +28,8 @@ namespace API.NetCore.Controllers
             _allowedExtensions = new List<string> { "jpg", "jpe", "jpeg", "gif", "png", "svg", "txt", "pdf", "odp", "ods", "odt", "rtf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "csv", "ogv", "avi", "mkv", "mp4", "webm", "m4v", "ogg", "mp3", "wav", "zip", "rar", "md" };
 
         }
-        //[ActionInfo("فایل ها", "مدیریت فایل ها")]
+        
+        [ActionInfo("فایل ها", "مدیریت فایل ها")]
         public IActionResult Index(string mode, string path, string name, List<IFormFile> files, string old, string @new, string source, string target, string content, bool thumbnail, string @string)
         {
             try

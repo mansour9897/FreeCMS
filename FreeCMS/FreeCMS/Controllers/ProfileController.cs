@@ -10,10 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using FreeCMS.DomainModels.Identity;
 using FreeCMS.ViewModels.Profile;
 using FreeCMS.Service.Filters;
+using FreeCMS.Attributes;
 
 namespace FreeCMS.Controllers
 {
-    [Authorize]
+    [FreeCmsAuthorize]
     public class ProfileController:Controller
     {
         #region variables ...

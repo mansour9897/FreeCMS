@@ -49,7 +49,10 @@ namespace FreeCMS.Extensions
             if (!await _roleManager.RoleExistsAsync(roleName))
             {
                 var role = new Role()
-                { Name = roleName };
+                {
+                    Name = roleName,
+                    IsAdmin = true
+                };
                 await _roleManager.CreateAsync(role);
             }
         }

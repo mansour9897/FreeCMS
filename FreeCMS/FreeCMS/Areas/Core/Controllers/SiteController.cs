@@ -1,4 +1,5 @@
 using FreeCMS.Areas.Core.ViewModels.Site;
+using FreeCMS.Attributes;
 using FreeCMS.Common.Utilities;
 using FreeCMS.DomainModels.System;
 using FreeCMS.Extensions;
@@ -11,7 +12,7 @@ namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت سایت","سیستم")]
     public class SiteController:Controller
     {

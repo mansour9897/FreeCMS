@@ -12,12 +12,13 @@ using Microsoft.AspNetCore.Authorization;
 
 using FreeCMS.Areas.Core.ViewModels;
 using FreeCMS.Extensions.Attributes;
+using FreeCMS.Attributes;
 
 namespace Webo.Core.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت کاربران", "سیستم")]
     public class UserController:Controller
     {
@@ -111,25 +112,27 @@ namespace Webo.Core.Areas.Core.Controllers
         {
             ViewBag.RoleId = new SelectList(this.GetRoles(), "Id", "Name");
             ViewBag.UserId = id;
-            string newPassword = "Websos!!0#";
+            string newPassword = "P@ssw0rd";
             ViewBag.NewPassword = newPassword;
             var user = _userManager.FindByIdAsync(id).Result;
             if(user == null)
             {
                 return  NotFound();
             }
+            
             var model = new EditUserVm(user);
             model.UserRoles = _userManager.GetRolesAsync(user).Result;
 
 			return View(model);
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(EditUserVm model)
         {
             ViewBag.RoleId = new SelectList(this.GetRoles(), "Id", "Name");
             ViewBag.UserId = model.Id;
-            string newPassword = "Websos!!0#";
+            string newPassword = "P@ssw0rd";
             ViewBag.NewPassword = newPassword;
             if(ModelState.IsValid)
             {

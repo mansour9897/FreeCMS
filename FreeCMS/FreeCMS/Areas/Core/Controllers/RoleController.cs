@@ -9,12 +9,13 @@ using FreeCMS.DomainModels.Identity;
 using FreeCMS.Areas.Core.ViewModels;
 using FreeCMS.Service.System.Implemented;
 using FreeCMS.Extensions.Attributes;
+using FreeCMS.Attributes;
 
 namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت نقش","سیستم")]
     public class RoleController : Controller
     {

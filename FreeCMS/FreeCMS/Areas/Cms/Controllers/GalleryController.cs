@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using FreeCMS.Areas.Cms.ViewModels;
+using FreeCMS.Attributes;
 using FreeCMS.DomainModels.Cms;
+using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.CMS.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
@@ -10,7 +13,9 @@ namespace FreeCMS.Areas.Cms.Controllers
 {
 	[Area("CMS")]
 	[Route("CMS/[controller]/[action]")]
-	public class GalleryController : Controller
+    [FreeCmsAuthorize]
+    [ControllerInfo("مدیریت گالری ها", "وبلاگ")]
+    public class GalleryController : Controller
 	{
 		#region variables
 		private readonly string _areaName = "CMS";
@@ -29,7 +34,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 		#endregion
 
 		#region actions
-		//[ActionInfo("مشاهده همه گالری ها", "فهرست گالری ها")]
+		[ActionInfo("مشاهده همه گالری ها", "فهرست گالری ها")]
 		public IActionResult Index(int? page)
 		{
 			var albums = _galleryService.GetAll().OrderByDescending(a => a.CreationDate).ToList();
@@ -37,8 +42,8 @@ namespace FreeCMS.Areas.Cms.Controllers
 			int pageNumber = page ?? 1;
 			return View(albums.ToPagedList(pageNumber, pageSize));
 		}
-		
-		//[ActionInfo("ایجاد گالری جدید", "گالری جدید")]
+
+		[ActionInfo("ایجاد گالری جدید", "گالری جدید")]
 		public IActionResult Create()
 		{
 			SetupGallertType(GalleryType.Image);
@@ -73,7 +78,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 			return View(gallery);
 		}
 
-		//[ActionInfo("ویرایش اطلاعات گالری", "ویرایش گالری")] 
+		[ActionInfo("ویرایش اطلاعات گالری", "ویرایش گالری")]
 		public IActionResult Edit(int id)
 		{
 			Gallery gallery = _galleryService.FindById(id);
@@ -101,7 +106,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 			return View(model);
 		}
 
-		//[ActionInfo("حذف گالری", "حذف گالری")]
+		[ActionInfo("حذف گالری", "حذف گالری")]
 		public IActionResult Delete(int id)
 		{
 			Gallery gallery = _galleryService.FindById(id);
@@ -109,6 +114,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 				return NotFound();
 			return View(gallery);
 		}
+		
 		[HttpPost]
 		[ActionName("Delete")]
 		[ValidateAntiForgeryToken]

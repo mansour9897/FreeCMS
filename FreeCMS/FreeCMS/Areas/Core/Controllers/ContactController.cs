@@ -1,14 +1,14 @@
 using FreeCMS.Extensions.Attributes;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using X.PagedList;
 using FreeCMS.Service.System.Abstraction;
+using FreeCMS.Attributes;
 
 namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت پیام ها","سیستم")]
     public class ContactController:Controller
     {
