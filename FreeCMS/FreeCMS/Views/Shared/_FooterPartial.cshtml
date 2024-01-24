@@ -1,0 +1,25 @@
+﻿@using FreeCMS.Service.System.Abstraction;
+
+@inject ISiteSettingService siteSettingService
+
+<footer class="border-top footer text-muted bg-dark py-3">
+	<div class="row">
+		<div class="col">
+			@await Component.InvokeAsync("ShowSocialNetworks")
+		</div>
+		<div class="col">
+			<p>@siteSettingService.GetSiteTelephone()</p>
+			<p>@siteSettingService.GetSiteFax()</p>
+			<p>@siteSettingService.GetSiteEmail()</p>
+			<p>@siteSettingService.GetSiteAddress()</p>
+		</div>
+		<div class="col">
+			@Html.Raw(siteSettingService.GetSiteAboutUs())
+		</div>
+
+	</div>
+	<div class="container">
+		&copy; 2023 - FreeCMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+	</div>
+</footer>
+
