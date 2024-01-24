@@ -33,6 +33,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.11" />
+    <PackageReference Include="UAParser" Version="3.1.47" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="9.0.0-prerelease" />
   </ItemGroup>
 
@@ -60,6 +61,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\lib\ChartJs\Chart.js" />
+    <None Include="wwwroot\lib\ChartJs\Chart.min.js" />
+    <None Include="wwwroot\lib\ChartJs\chartjs-plugin-datalabels.js" />
+    <None Include="wwwroot\lib\ChartJs\chartjs-plugin-datalabels.min.js" />
     <None Include="wwwroot\lib\jqueryui\js\jquery-ui.min.js" />
     <None Include="wwwroot\RichFilemanager\.gitignore" />
     <None Include="wwwroot\RichFilemanager\changelog" />
