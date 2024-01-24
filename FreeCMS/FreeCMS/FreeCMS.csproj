@@ -61,6 +61,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\lib\ChartJs\Chart.js" />
+    <None Include="wwwroot\lib\ChartJs\Chart.min.js" />
+    <None Include="wwwroot\lib\ChartJs\chartjs-plugin-datalabels.js" />
+    <None Include="wwwroot\lib\ChartJs\chartjs-plugin-datalabels.min.js" />
     <None Include="wwwroot\lib\jqueryui\js\jquery-ui.min.js" />
     <None Include="wwwroot\RichFilemanager\.gitignore" />
     <None Include="wwwroot\RichFilemanager\changelog" />
