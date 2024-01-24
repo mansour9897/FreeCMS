@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FreeCMS.Areas.Cms.ViewModels.Topic;
+using FreeCMS.Attributes;
 using FreeCMS.DomainModels.Cms;
 using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.CMS.Abstraction;
@@ -12,7 +13,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 {
 	[Area("CMS")]
 	[Route("CMS/[controller]/[action]")]
-	[Authorize]
+	[FreeCmsAuthorize]
 	[ControllerInfo("مدیریت دسته ها","وبلاگ")]
 	public class TopicController : Controller
 	{
@@ -33,7 +34,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 		#endregion
 
 		#region actions
-		//[ActionInfo("مشاهده همه دسته ها", "فهرست دسته ها")]
+		[ActionInfo("مشاهده همه دسته ها", "فهرست دسته ها")]
 		public IActionResult Index(int? page)
 		{
 			var topics = _topicService.GetAll().OrderByDescending(t => t.CreationDate);
@@ -41,8 +42,8 @@ namespace FreeCMS.Areas.Cms.Controllers
 			int pageNumber = page ?? 1;
 			return View(topics.ToPagedList(pageNumber, pageSize));
 		}
-		 
-				//[ActionInfo("ایجاد دسته جید", "ایجاد دسته")]
+
+		[ActionInfo("ایجاد دسته جید", "ایجاد دسته")]
 		public IActionResult Create()
 		{
 			SetupParentList(null);
@@ -67,8 +68,8 @@ namespace FreeCMS.Areas.Cms.Controllers
 			}
 			return View(model);
 		}
-		
-		//[ActionInfo("مشاهده جزییات دسته", "جزییات دسته")]
+
+		[ActionInfo("مشاهده جزییات دسته", "جزییات دسته")]
 		public IActionResult Details(int id)
 		{
 			var topic = _topicService.FindById(id);
@@ -77,7 +78,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 			return View(topic);
 		}
 
-		//[ActionInfo("ویرایش اطلاعات دسته", "ویرایش دسته")]
+		[ActionInfo("ویرایش اطلاعات دسته", "ویرایش دسته")]
 		public IActionResult Edit(int id)
 		{
 			var topic = _topicService.FindById(id);
@@ -107,8 +108,8 @@ namespace FreeCMS.Areas.Cms.Controllers
 			SetupEditableParentList(model.Id, model.ParentId);
 			return View(model);
 		}
-		
-		//[ActionInfo("حذف دسته", "حذف دسته")]
+
+		[ActionInfo("حذف دسته", "حذف دسته")]
 		public IActionResult Delete(int id)
 		{
 			var topic = _topicService.FindById(id);
@@ -116,6 +117,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 				return NotFound();
 			return View(topic);
 		}
+		
 		[HttpPost]
 		[ActionName("Delete")]
 		[ValidateAntiForgeryToken]

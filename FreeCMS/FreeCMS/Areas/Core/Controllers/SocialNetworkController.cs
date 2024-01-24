@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using FreeCMS.DomainModels.System;
 using FreeCMS.Areas.Core.ViewModels;
 using FreeCMS.Service.System.Abstraction;
+using FreeCMS.Attributes;
 
 namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت شبکه های اجتماعی","سیستم")]
     public class SocialNetworkController:Controller
     {

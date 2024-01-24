@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FreeCMS.Areas.Cms.ViewModels.Post;
 using FreeCMS.Areas.Cms.ViewModels.Topic;
+using FreeCMS.Attributes;
 using FreeCMS.DomainModels.Cms;
 using FreeCMS.DomainModels.Identity;
 using FreeCMS.Extensions.Attributes;
@@ -16,7 +17,7 @@ namespace FreeCMS.Areas.Cms.Controllers
     [Area("CMS")]
     [Route("CMS/[controller]/[action]")]
     [ControllerInfo("مدیریت نوشته ها","وبلاگ")]
-    [Authorize]
+    [FreeCmsAuthorize]
     public class PostController : Controller
     {
         #region variables
@@ -45,7 +46,7 @@ namespace FreeCMS.Areas.Cms.Controllers
         #endregion
 
         #region actions
-        //[ActionInfo("مشاهده همه نوشته ها", "فهرست نوشته ها")]
+        [ActionInfo("مشاهده همه نوشته ها", "فهرست نوشته ها")]
         public IActionResult Index(int? page)
         {
             var posts = _postService.GetAll().OrderByDescending(t => t.CreationDate);
@@ -54,7 +55,7 @@ namespace FreeCMS.Areas.Cms.Controllers
             return View(posts.ToPagedList(pageNumber, pageSize));
         }
 
-        //[ActionInfo("ایجاد نوشته جدید", "نوشته جدید")]
+        [ActionInfo("ایجاد نوشته جدید", "نوشته جدید")]
         public IActionResult Create()
         {
             SetupTopicsSelector(null);
@@ -85,7 +86,7 @@ namespace FreeCMS.Areas.Cms.Controllers
             return View(model);
         }
 
-        //[ActionInfo("مشاهده جزییات نوشته", "مشاهده نوشته")]
+        [ActionInfo("مشاهده جزییات نوشته", "مشاهده نوشته")]
         public IActionResult Details(int id)
         {
             Post post = _postService.GetPostWithPostTopics(id);
@@ -102,7 +103,7 @@ namespace FreeCMS.Areas.Cms.Controllers
             return View(post);
         }
 
-        //[ActionInfo("ویرایش جزییات نوشته", "ویرایش نوشته")]
+        [ActionInfo("ویرایش جزییات نوشته", "ویرایش نوشته")]
         public IActionResult Edit(int id)
         {
             Post post = _postService.FindById(id);
@@ -138,7 +139,7 @@ namespace FreeCMS.Areas.Cms.Controllers
             return View(model);
         }
 
-        //[ActionInfo("حذف نوشته", "حذف نوشته")]
+        [ActionInfo("حذف نوشته", "حذف نوشته")]
         public IActionResult Delete(int id)
         {
             Post post = _postService.GetPostWithPostTopics(id);

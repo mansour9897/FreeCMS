@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
+using FreeCMS.Attributes;
+
 namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت منوها","سیستم")]
     public class MenuController:Controller
     {

@@ -1,3 +1,4 @@
+using FreeCMS.Attributes;
 using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.System.Abstraction;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +8,7 @@ namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("آمار بازدید","سیستم")]
     public class AnalyticController:Controller
     {

@@ -1,12 +1,12 @@
-﻿using FreeCMS.Extensions.Attributes;
-using Microsoft.AspNetCore.Authorization;
+﻿using FreeCMS.Attributes;
+using FreeCMS.Extensions.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeCMS.Areas.Cms.Controllers
 {
-    [Area("CMS")]
+	[Area("CMS")]
     [Route("CMS/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت وبلاگ","وبلاگ")]
     public class AdminController : Controller
 	{

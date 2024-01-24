@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FreeCMS.Areas.Cms.ViewModels.Slide;
+using FreeCMS.Attributes;
 using FreeCMS.DomainModels.Cms;
 using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.CMS.Abstraction;
@@ -11,7 +12,7 @@ namespace FreeCMS.Areas.Cms.Controllers
 {
     [Area("CMS")]
     [Route("CMS/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت اسلاید ها", "وبلاگ")]
     public class SlideController : Controller
     {
@@ -115,7 +116,7 @@ namespace FreeCMS.Areas.Cms.Controllers
         #region methods
         private IActionResult RedirectToIndex()
         {
-            return RedirectToAction("Index", "Slide", new { area = "Biz" });
+            return RedirectToAction("Index", "Slide", new { area = "CMS" });
         }
         #endregion
     }

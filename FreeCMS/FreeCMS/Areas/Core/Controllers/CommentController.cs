@@ -1,3 +1,4 @@
+using FreeCMS.Attributes;
 using FreeCMS.DomainModels.System;
 using FreeCMS.Extensions.Attributes;
 using FreeCMS.Service.System.Abstraction;
@@ -8,7 +9,7 @@ namespace FreeCMS.Areas.Core.Controllers
 {
     [Area("Core")]
     [Route("Core/[controller]/[action]")]
-    [Authorize]
+    [FreeCmsAuthorize]
     [ControllerInfo("مدیریت دیدگاه ها","سیستم")]
     public class CommentController:Controller
     {
